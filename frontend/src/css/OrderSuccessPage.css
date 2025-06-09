@@ -1,0 +1,73 @@
+
+.order-success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center;     /* Center horizontally */
+  padding: 2rem;
+  margin-top: 0;           /* Remove margin-top if needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+
+  .order-success-details {
+    margin-top: 0px;
+  }
+  
+  .greeting {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .order-confirmation {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .thank-you {
+    color: #757575;
+    margin-top: 0.5rem;
+  }
+  
+  .order-actions {
+    margin-top: 2rem;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 480px) {
+    .order-success {
+      padding: 1rem;
+      width: 90%;
+    }
+  
+    .button {
+      font-size: 0.875rem;
+    }
+  
+    .animation img {
+      max-width: 120px;
+    }
+  }
+  

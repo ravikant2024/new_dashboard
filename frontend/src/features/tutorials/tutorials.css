@@ -1,0 +1,92 @@
+/* Container styling */
+.tutorialcard-container {
+  margin: 20px auto;
+  max-width: 1200px;
+  text-align: center;
+}
+
+/* Heading styling */
+.tutorial-heading {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Grid Layout for Tutorial Cards */
+.tutorial-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px;
+  justify-items: center;
+}
+
+/* Card Styling */
+.tutorial-card {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Top Section */
+.tutorial-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, black 50%, orange 50%);
+  padding: 20px;
+  position: relative;
+}
+
+/* Left Side Text */
+.tutorial-details {
+  width: 50%;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Right Side Image */
+.tutorial-right {
+  width: 50%;
+}
+
+.tutorial-right img {
+  width: 100%;
+  margin: 8px;
+}
+
+/* Bottom Section */
+.tutorial-description {
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+/* Container button */
+.button-container {
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+/* Button styling */
+button {
+  background-color: rgb(212, 133, 33);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* Hover effect on button */
+button:hover {
+  background-color: #060606; 
+}

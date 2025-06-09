@@ -1,0 +1,240 @@
+
+/* General container styling */
+.order-history-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Back Arrow */
+.back-arrow {
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+
+.order-history-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* Subtitle */
+.order-subtitle {
+  font-size: 17px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* Order Card */
+.order-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+/* Order Header (Top Section) */
+.order-header {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* Order Details Layout */
+.order-details-history {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.order-item-header {
+  font-weight: 5old;
+  font-size: 14px;
+}
+
+.order-item-value {
+  font-size: 14px;
+}
+
+/* Delivery Section */
+.delivery-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.delivery-section h4 {
+  margin-bottom: 5px;
+}
+
+/* Change Address Button */
+.change-address {
+  background-color: #c57a00;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+/* Order Item Section */
+.order-history {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.order-history img {
+  width: 300px;
+  height: 260px;
+  margin-top: 30px;
+}
+
+.history-product-details {
+  width: 65%;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-product-details p {
+  margin-top: 0px;
+  color: rgb(123, 123, 120);
+}
+
+.product-details p {
+  margin: 5px 0;
+  font-size: 14px;
+
+}
+
+.product-price {
+  font-size: 13px;
+  color: black;
+  align-self: flex-end;
+  margin-top: -35px;
+}
+
+.product-description {
+  font-size: 13px;
+  color: gray;
+  margin-left: 0;
+  padding: 5px 0;
+  line-height: 1.5;
+}
+
+/* Order Buttons */
+.order-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn {
+  background-color: #ff8533;
+  color: #333;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.buy-again {
+  font-weight: bold;
+  margin-right: 0;
+  background-color: #e0e0e0;
+}
+
+/* Order Status */
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+
+/* No any orders */
+.no-any-orders{
+  margin-top: 30px;
+  font-size: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+}
+
+
+/* ----------------------------
+   Responsive Breakpoints
+---------------------------- */
+
+/* Tablets */
+@media screen and (max-width: 768px) {
+  .order-details-history {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .order-history {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-history img {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .history-product-details {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .delivery-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .order-history-header h1 {
+    font-size: 20px;
+  }
+
+  .order-subtitle {
+    font-size: 14px;
+  }
+
+  .order-details-history {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .change-address {
+    width: 100%;
+  }
+
+  .product-price {
+    margin-top: 5px;
+    text-align: left;
+  }
+}

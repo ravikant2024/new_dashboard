@@ -1,0 +1,289 @@
+/* Profile container */
+.profile-container {
+  width: 650px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Profile header */
+.profile-header h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 22px;
+}
+
+/* Profile info */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Profile picture */
+.profile-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon size and color */
+.profile-picture svg {
+  color: #555;
+}
+
+/* Profile details */
+.profile-details {
+  text-align: center;
+}
+
+.profile-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Add Address button */
+.add-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+
+/* General form styling */
+.address-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.address-form-section {
+  margin-bottom: 14px;
+}
+
+.input-group {
+  margin-bottom: 12px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-button,
+.reset-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button {
+  background-color: #4a90e2;
+  color: #fff;
+}
+
+.submit-button:hover {
+  background-color: #357ab7;
+}
+
+.reset-button {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.reset-button:hover {
+  background-color: #ddd;
+}
+
+/* Delete Account button */
+.delete-btn-account {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+.delete-btn-account:hover {
+  background-color: #c82333;  /* Darker red when hovered */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+  .profile-container {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .profile-header h2 {
+    font-size: 20px;
+  }
+
+  .profile-details p {
+    font-size: 14px;
+  }
+
+  .add-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .address-form-container {
+    max-width: 90%;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    font-size: 12px;
+  }
+
+  .submit-button,
+  .reset-button {
+    font-size: 12px;
+  }
+
+  .delete-btn-account {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .profile-header h2 {
+    font-size: 18px;
+  }
+
+  .profile-info {
+    gap: 15px;
+  }
+
+  .profile-details p {
+    font-size: 12px;
+  }
+
+  .add-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .address-form-container {
+    max-width: 100%;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    font-size: 12px;
+  }
+
+  .submit-button,
+  .reset-button {
+    font-size: 12px;
+  }
+
+  .delete-btn-account {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .profile-header h2 {
+    font-size: 16px;
+  }
+
+  .profile-info {
+    gap: 10px;
+  }
+
+  .profile-details p {
+    font-size: 12px;
+  }
+
+  .add-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .address-form-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    font-size: 12px;
+  }
+
+  .submit-button,
+  .reset-button {
+    font-size: 12px;
+  }
+
+  .delete-btn-account {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}

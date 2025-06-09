@@ -1,0 +1,52 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "web_server": "cd initializers && nodemon deviceConnectionManager.js",
+    "start_both": "concurrently \"npm run dev\" \"npm run web_server\"",
+    "seed": "node seed/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "http-server ./build -p 3000",
+    "start-server": "http-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "7.9.1",
+    "@faker-js/faker": "^9.2.0",
+    "@langchain/google-genai": "^0.1.5",
+    "archiver": "^7.0.1",
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "faker": "^6.6.6",
+    "icici-dev": "^2.1.7",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nats": "^2.28.2",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.15",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4",
+    "pino": "^9.5.0",
+    "sequelize": "^6.37.3",
+    "tweetnacl": "^1.0.3",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.0.2"
+  }
+}

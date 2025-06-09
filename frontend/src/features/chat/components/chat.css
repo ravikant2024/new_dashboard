@@ -1,0 +1,214 @@
+/* Style for the chat icon */
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff8c00;
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 999; 
+  }
+
+
+
+.chat-container {
+  background-color: #f0f4f8;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: fixed; 
+  bottom: 20px;
+  right: 20px; 
+  z-index: 1000; 
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; 
+}
+
+.chat-container.open {
+  opacity: 1; /* Make it visible */
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0s; 
+}
+
+/* ... the rest of your CSS for the chat container ... */
+
+.chat-header {
+  background-color: #ff8c00;
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.chat-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+.close-chat-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;         
+    cursor: pointer;
+    width: 28px;            
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  
+  .close-chat-button:hover {
+    background-color: red; 
+    transform: scale(1.1);
+  }
+  
+.chat-messages {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.message {
+  background-color: white;
+  border-radius: 10px;
+  padding: 0px 16px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+  max-width: 80%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.message.bot-message {
+  background-color: #f0f0f0;
+  /* border-radius: 20px 20px 20px 0; */
+}
+
+.message-text {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.input-container .input-field {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 24px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  height: 44px;
+  margin-bottom: 10px;
+}
+
+.input-field::placeholder {
+  color: #aaa;
+}
+
+.chat-submit-button {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  align-self: center;
+  width: 100%;
+  background-color: #ddd;
+  margin-bottom: 10px;
+ 
+}
+
+.submit-button:hover {
+    background-color: #ada6a6;
+}
+
+.chat-input-area {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+    position: relative;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px 40px 12px 12px; 
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.chat-input::placeholder {
+    color: #aaa;
+}
+
+.send-msg-button,
+.send-msg-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.send-msg-button {
+    font-size: 1.5em;
+    color: #888;
+}
+.send-msg-button:hover {
+    background: none; 
+    color: orange;
+}
+
+.send-msg-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #007bff; 
+} 
+.send-msg-icon:hover {
+    background: none 
+}
+.send-msg-icon:hover svg {
+    fill: #ffbf00;
+ 
+}
+
+

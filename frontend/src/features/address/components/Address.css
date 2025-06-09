@@ -1,0 +1,63 @@
+/* Address Card */
+.address-card {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+   .name {
+    background-color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .address-card .address-details {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .address-card .address-details p {
+    margin: 5px 0;
+  }
+  
+  /* Actions (Edit, Remove) */
+  .actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .edit-button,
+  .remove-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 35%;
+  }
+  
+  .edit-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .remove-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .edit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .remove-button:hover {
+    background-color: #e53935;
+  }

@@ -1,0 +1,40 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { thunk } from 'redux-thunk';
+import authReducer from "../features/auth/AuthSlice";
+import userReducer from "../features/user/UserSlice"
+import categoriesReducer from "../features/categories/CategoriesSlice"
+import productReducer from "../features/products/ProductsSlice"
+import cartReducer from '../features/cart/CartSlice';
+import addressReducer from "../features/address/AddressSlice"
+import wishlistReducer from '../features/wishlist/WishlistSlice'
+import reviewsReducer from "../features/review/ReviewSlice"
+import brandReducer from "../adminpanel/addbrand/AddBrandSlice"
+import catgoryReducer from "../adminpanel/category/CategorySlice"
+import orderReducer from "../features/orders/OrderSlice"
+import couponReducer from "../adminpanel/coupon/CouponSlice"
+import blogReducer from '../features/blogs/BlogSlice';
+import commentReducer from '../features/comment/CommentSlice';
+import contactReducer from '../features/contact/ContactSlice';
+const store = configureStore({
+    reducer: {
+        AuthSlice: authReducer,
+        userSlice: userReducer,
+        categories: categoriesReducer,
+        productSlice: productReducer,
+        CartSlice: cartReducer,
+        addressSlice: addressReducer,
+        WishlistSlice: wishlistReducer,
+        ReviewSlice: reviewsReducer,
+        brandSlice: brandReducer,
+        categorySlice: catgoryReducer,
+        orderSlice: orderReducer,
+        couponSlice: couponReducer,
+         blogSlice: blogReducer,
+        comments: commentReducer,
+        contact: contactReducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(thunk),
+});
+
+export default store;

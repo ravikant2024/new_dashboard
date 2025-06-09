@@ -1,0 +1,302 @@
+  /* Track Order Search Section */
+  .track-order-search-section {
+    background-color: #e6d9d9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 650px;
+    margin: 0 auto;
+   
+  }
+
+  .track-order-search-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .track-order-search-input-container {
+    display: inline-flex;
+    width: 450px;
+    margin: 0 auto;
+  }
+
+
+  .track-order-search-input {
+    flex: 1;
+    padding: 5px;
+    font-size: 22px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .track-order-search-button {
+    background-color: #e69138;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+
+
+    /* Track Order Card */
+    .track-order-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 30px;
+      width: 80%;
+      max-width: 1000px; 
+      margin-left: auto; 
+      margin-right: auto; 
+      margin-top: 40px;
+    }
+    
+
+/* Track Order Header (Top Section) */
+.track-order-header {
+  padding-bottom: 10px;
+}
+
+/* Track Order Details Layout */
+.track-order-details-history {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.track-order-item-header {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.track-order-item-value {
+  font-size: 14px;
+}
+
+/* Track Delivery Section */
+.track-delivery-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.track-delivery-section h4 {
+  margin-bottom: 5px;
+}
+
+/* Track Change Address Button */
+.track-change-address {
+  background-color: #c57a00;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+/* Track Order Item Section */
+.track-order-history {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.track-order-history img {
+  /* background-color: red; */
+  width: 300px;
+  height: 250px;
+  margin-top: 50px;
+}
+
+.track-history-product-details {
+  width: 65%;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-history-product-details p {
+  margin-top: 0px;
+  color: rgb(123, 123, 120);
+}
+
+.track-product-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.track-product-price {
+  font-size: 13px;
+  color: black;
+  align-self: flex-end;
+  margin-top: -35px;
+}
+
+.track-product-description {
+  font-size: 15px;
+  font-weight: bold;
+  color: gray;
+  margin-left: 0;
+  padding: 5px 0;
+  line-height: 1.5;
+}
+
+/* Track Order Buttons */
+.track-order-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.track-btn {
+  background-color: #ff8533;
+  color: #333;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.track-btn:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.track-buy-again {
+  font-weight: bold;
+  margin-right: 0;
+  background-color: #e0e0e0;
+}
+
+/* Track Order Status */
+.track-order-status {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* No Any Orders */
+.track-no-any-orders {
+  margin-top: 30px;
+  font-size: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+}
+
+/* Smartphones (portrait) — up to 600px */
+@media (max-width: 600px) {
+  .track-order-search-section {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .track-order-search-input-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .track-order-search-input,
+  .track-order-search-button {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .track-order-card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .track-order-details-history {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .track-delivery-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .track-order-history {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .track-order-history img {
+    width: 100%;
+    height: auto;
+  }
+
+  .track-history-product-details {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .track-order-buttons {
+    justify-content: center;
+  }
+}
+
+/* Tablets — 601px to 900px */
+@media (min-width: 601px) and (max-width: 900px) {
+  .track-order-search-section {
+    width: 90%;
+  }
+
+  .track-order-search-input-container {
+    width: 100%;
+  }
+
+  .track-order-card {
+    width: 90%;
+  }
+
+  .track-order-details-history {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .track-order-history img {
+    width: 100%;
+    height: auto;
+  }
+
+  .track-history-product-details {
+    width: 100%;
+  }
+
+  .track-order-buttons {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+/* Laptops and desktops — 901px and up */
+@media (min-width: 901px) {
+  .track-order-search-section {
+    width: 650px;
+  }
+
+  .track-order-search-input-container {
+    width: 450px;
+  }
+
+  .track-order-card {
+    width: 80%;
+    max-width: 1000px;
+  }
+
+  .track-order-details-history {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

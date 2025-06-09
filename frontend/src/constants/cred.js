@@ -1,0 +1,1 @@
+export const key='oillp_store'

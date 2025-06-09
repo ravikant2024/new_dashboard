@@ -1,0 +1,28 @@
+/* Custom Sidebar */
+.custom-sidebar {
+    background-color: #f4f4f4;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* Add hover effect on MenuItem */
+.custom-sidebar .menu:hover {
+    background-color: grey !important;
+    color: red !important;
+}
+
+/* Add hover effect for SubMenu items */
+.custom-sidebar .pro-sub-menu .pro-menu-item:hover {
+    background-color: grey !important;
+    color: red !important;
+}
+
+@media screen and (max-width: 374px) {
+    .custom-sidebar {
+        margin-left: -8px;
+    }
+    .custom-sidebar li{
+        margin-bottom: -15px;
+    }
+    
+}

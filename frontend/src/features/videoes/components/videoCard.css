@@ -1,0 +1,85 @@
+/* Grid Layout for Video Cards */
+.video-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  width: 100%;
+}
+
+/* Clickable Link that wraps video cards */
+.video-card-link {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+/* Individual Card Styling */
+.video-card {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ReactPlayer Container */
+.video-header {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Maintains 16:9 ratio */
+  overflow: hidden;
+  background: #000;
+}
+
+/* ReactPlayer will fill the container */
+.video-header > div {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Description Section */
+.video-description {
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+/* Optional Play Button Style (for thumbnail previews) */
+.play-button {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-videos {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #0b0b0b;
+    font-weight: 500;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #2489b7;
+    width: 50%;
+}

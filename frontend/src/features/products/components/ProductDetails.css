@@ -1,0 +1,551 @@
+.product-page {
+  display: flex;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.sidebar-data {
+  width: 290px;
+  margin-right: 5px;
+  margin-top: 0px;
+  height: auto;
+}
+
+.categories .show-all {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.category-list {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.category-list p {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.product-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.image-productinfo-section {
+  display: flex;
+  height: 720px;
+}
+
+.image-gallery {
+  width: 470px;
+  margin-right: 0px;
+  height: 470px;
+}
+
+.main-image {
+  width: 370px;
+  height: 300px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.thumbnail-group {
+  display: flex;
+  margin-top: 25px;
+  padding-left: 10px;
+}
+
+.thumbnail {
+  width: 90px;
+  height: 90px;
+  margin-right: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail.active {
+  border-color: #007bff;
+}
+
+.product-info {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: flex-start;
+  margin-left: 5px;
+}
+
+.info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.product-header {
+  margin-bottom: 5px;
+}
+
+.product-category {
+  font-size: 1em;
+  color: #777;
+  margin-bottom: 2px;
+  text-align: left;
+  margin-top: 0px;
+}
+
+.product-title {
+  font-size: 1.5em;
+  margin-bottom: 0px;
+  padding: 5px;
+  margin-top: 0px;
+}
+
+.availability {
+  margin-bottom: 5px;
+  color: rgb(167, 171, 174);
+  margin-top: 0px;
+}
+
+.availability span {
+  color: green;
+}
+
+.add-wishlist {
+  background-color: #e64b17;
+  border: none;
+  padding: 8px 8px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.contact {
+  margin-bottom: 15px;
+}
+
+.contact span {
+  color: #585555;
+}
+
+.sku {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.specs-list {
+  list-style-type: decimal;
+  margin-top: 6px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+
+.specs-item {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+
+}
+
+/* Style for the key */
+.specs-key {
+  color: #070808;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+/* Style for the value */
+.specs-value {
+  font-size: 15px;
+  color: #909596;
+  line-height: 1.4;
+  margin-left: 3px;
+}
+
+.price {
+  font-size: 2em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  color: rgb(9, 0, 0);
+}
+
+.price span {
+  font-size: 24px;
+}
+
+.discounted-price {
+  color: green;
+  margin-right: 10px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: gray;
+  margin-right: 10px;
+  margin-left: 1px;
+}
+.price .gst{
+  font-size: 13px;
+}
+
+.low-stock-product {
+  color: red;
+}
+
+.low-stock-product span {
+  font-size: 20px;
+}
+
+.add-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.quantity button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 35px;
+  border-radius: 70%;
+  background-color: #e5e2e3;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.quantity button:hover{
+  background-color: black;
+}
+
+.quantity span {
+  display: inline-block;
+  min-width: 24px; 
+  text-align: center;
+  font-size: 15px;
+}
+
+.add-actions input[type="number"] {
+  width: 60px;
+  padding: 5px;
+}
+.addbuybutton{
+  text-align: center;
+  margin-left: 30px;
+}
+
+.add-cart {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+.buy-now {
+  background-color: #d27c0b;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  
+}
+
+.cart-icon {
+  margin-right: 8px;
+}
+
+
+/* Courier shipping */
+.shipping-bar {
+  font-family: sans-serif;
+  margin-left: 0;
+}
+
+/* Flexbox container for shipping content */
+.features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #fff;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  text-align: center;
+  max-width: 160px;
+  margin: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #333;
+}
+
+.feature-item a {
+  color: blue;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.feature-item a:hover {
+  text-decoration: underline;
+}
+
+/* Secondary Content */
+.secondary-content {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #555;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.not-found-product {
+  margin-bottom: 5px;
+  color: #007bff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* .not-found-product:hover {
+  text-decoration: underline;
+  cursor: pointer;
+} */
+
+.product-details-brand {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+}
+
+.product-details-category {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+}
+
+.tab-section {
+  width: 100%;
+  padding: 0px;
+  margin-top: 0px;
+  text-align: center;
+  
+}
+
+/* Tabs Styling */
+.tabs {
+  display: flex;
+  padding: 10px 0;
+  background: white;
+  justify-content: space-between;
+  margin-left: 30px;
+}
+
+.tabs .tab {
+  text-decoration: none;
+  color: #666;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.3s ease-in-out;
+  border-bottom: 3px solid transparent;
+}
+
+.tabs .tab.active {
+  color: #2C2C8A;
+  border-bottom: 3px solid #2C2C8A;
+}
+
+.tabs .tab:hover {
+  color: #000;
+}
+
+/* Description Container */
+.description-container {
+  padding: 0px;
+  border-radius: 10px;
+  border: 1px solid rgb(218, 213, 213);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Warranty section */
+.warranty-info {
+  font-family: sans-serif;
+  padding: 2px;
+}
+
+.warranty-title {
+  font-size: 1em;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.void-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* technical specification css*/
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.spec-table td {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  vertical-align: top;
+}
+
+.item-label {
+  background-color: #707070;
+  color: #fff;
+  font-weight: bold;
+  width: 35%;
+  white-space: nowrap;
+}
+
+.item-details {
+  background-color: #f3f3f3;
+  color: #333;
+  line-height: 1.5;
+}
+/* Base Reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .image-productinfo-section {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .image-gallery {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .product-info {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .info {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .tabs {
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+
+  .shipping-content {
+    justify-content: center;
+  }
+
+  .shipping-column {
+    margin: 10px;
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-page {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .sidebar-data {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .image-productinfo-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .addbuybutton {
+    margin-left: 0;
+  }
+
+  .tabs .tab {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .shipping-column {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .discounted-price,
+  .original-price,
+  .price span {
+    font-size: 18px;
+  }
+
+  .product-title {
+    font-size: 1.2em;
+  }
+
+  .tab-section {
+    padding: 5px;
+  }
+
+  .description-container {
+    padding: 10px;
+  }
+
+  .shipping-column {
+    margin: 10px auto;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "license_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node dist/index.js",
+    "start": "ts-node-dev src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cron": "^3.2.0",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0",
+    "node-cron": "^3.0.3",
+    "redis": "^4.7.0",
+    "string-hash": "^1.1.3",
+    "uuid": "^11.0.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node-cron": "^3.0.11",
+    "ts-node-dev": "^2.0.0"
+  }
+}

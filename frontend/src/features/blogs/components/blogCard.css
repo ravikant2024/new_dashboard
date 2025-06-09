@@ -1,0 +1,87 @@
+/* Grid Layout for Blog Cards */
+.blog-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.blog-card-link {
+  text-decoration: none;
+}
+
+/* Blog Card Styling */
+.blog-card {
+  width: 100%;
+  max-width: 310px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+  font-family: Arial, sans-serif;
+  height: 270px;
+}
+
+/* Blog Header (Top Section) */
+.blog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, black 50%, orange 50%);
+  padding: 20px;
+  position: relative;
+  height: 180px;
+}
+
+/* Blog Right Side (Image) */
+.blog-right {
+  margin-left: 21px;
+  width: 85%;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.blog-right img {
+  width: 100%;
+  margin: 8px;
+  border-radius: 10px;
+}
+
+/* Blog Description (Bottom Section) */
+.blog-description {
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .blog-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .blog-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-card {
+    max-width: 100%;
+  }
+
+  .blog-header {
+    height: 220px; 
+    padding: 15px;
+  }
+
+  .blog-description {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+

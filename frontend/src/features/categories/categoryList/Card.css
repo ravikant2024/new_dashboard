@@ -1,0 +1,160 @@
+/* -------------------------
+   Container & Headings
+-------------------------- */
+.cat-container {
+  margin: 40px 0 0 8px;
+  padding: 13px;
+  text-align: center;
+}
+
+.categories-heading {
+  margin: 10px 0 15px 22px;
+  font-size: 25px;
+  color: #242323;
+  text-align: left;
+  font-family: Arial, sans-serif;
+}
+
+
+/* -------------------------
+      Grid & Layout
+-------------------------- */
+.container-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+
+/* -------------------------
+        Card Styles
+-------------------------- */
+.cat-card {
+  background-color: rgb(252, 250, 250);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 296px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0.5px solid #f1f1f1;
+}
+
+.cat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* -------------------------
+       Image Styling
+-------------------------- */
+.catcard-image-wrapper {
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 5 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-top: 17px;
+}
+
+.catcard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
+/* -------------------------
+       Card Content
+-------------------------- */
+.catcard-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.catcard-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .cat-container {
+    margin: 20px 0 0 5px;
+    text-align: center;
+  }
+
+  .categories-heading {
+    margin: 8px 0 12px 10px;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .container-data {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 0 8px;
+  }
+
+  .cat-card {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .catcard-image-wrapper {
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-top: 12px;
+  }
+
+  .catcard-content {
+    padding: 12px;
+  }
+
+  .catcard-title {
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+}
+@media (min-width: 769px) {
+  .container-data {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    padding: 0 10px;
+  }
+
+  .cat-card {
+    max-width: 296px;
+  }
+
+  .catcard-image-wrapper {
+    max-width: 250px;
+    aspect-ratio: 5 / 4;
+    margin-top: 17px;
+  }
+
+  .catcard-content {
+    padding: 15px;
+  }
+
+  .catcard-title {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+}

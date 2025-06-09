@@ -1,0 +1,17 @@
+.view-all-container {
+    margin: 50px auto;
+    width: 100%;
+    text-align: center;
+    /* padding: 0 15px; */
+    box-sizing: border-box;
+
+}
+
+.view-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    width: 100%;
+    padding: 15px;
+}

@@ -1,0 +1,71 @@
+# Ignore node_modules in both backend and frontend
+/backend/node_modules
+/frontend/node_modules
+/whatsapp_server/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore build output (common for both frontend and backend)
+/frontend/build
+/backend/dist
+
+# Ignore environment variable files
+
+
+# Dependency directories
+/frontend/.pnp
+/frontend/pnp.js
+
+# Frontend specific
+/frontend/.next
+/frontend/.nuxt
+/frontend/.cache
+
+# Ignore coverage files (from tests)
+/coverage
+/backend/coverage
+/frontend/coverage
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore package-lock and yarn-lock if they aren't needed
+/backend/package-lock.json
+/frontend/package-lock.json
+/backend/yarn.lock
+/frontend/yarn.lock
+
+# Ignore miscellaneous
+**/debug.log
+**/npm-debug.log
+**/yarn-debug.log
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Ignore testing-related snapshots
+/frontend/tests/__snapshots__/
+/test/
+
+/tools/mongo_data
+/tools/postgres_data
+/tools/mqtt_data
+/tools/mongo_backup
+/tools/postgres_backup
+/tools/elastic_data
+/tools/kb_data
+# .env
+.env

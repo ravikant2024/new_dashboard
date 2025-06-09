@@ -1,0 +1,28 @@
+/* AboutUs.css */
+.about-us-container {
+    font-family: sans-serif;
+    padding: 20px;
+    margin: 0 auto;
+
+}
+
+.breadcrumb {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
