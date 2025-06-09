@@ -60,7 +60,6 @@ const Footer = () => {
                 <FaInstagramSquare />
               </Link>
               <Link to="https://www.instagram.com/original_innovation_llp" target="_blank">
-
                 <FaLinkedinIn />
               </Link>
             </div>
@@ -79,9 +78,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
       <hr className="footer-divider" />
-
       <div className="footer-bottom">
         <div className="footer-left-links">
           <span>©2025 Original Innovation LLP</span>
