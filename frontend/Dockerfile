@@ -6,10 +6,14 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package*.json ./
+
 RUN npm install --force
 
 # Copy source code
 COPY . .
+
+# Build the app
+RUN npm run build
 
 # Expose dev server port (adjust based on Vite or React)
 EXPOSE 5173
