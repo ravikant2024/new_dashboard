@@ -69,3 +69,4 @@ Thumbs.db
 /tools/kb_data
 # .env
 .env
+/frontend/Dockerfile
