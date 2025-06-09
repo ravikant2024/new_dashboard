@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const SideBar = ({ closeSidebar }) => {
     const dispatch = useDispatch();
     const categories = useSelector(selectCategories);
+    console.log("categories",categories)
     const [activeSubMenuIndex, setActiveSubMenuIndex] = useState(null);
     const [hoveredItem, setHoveredItem] = useState(null);
 
