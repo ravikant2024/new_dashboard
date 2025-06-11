@@ -56,12 +56,13 @@ const Footer = () => {
               <Link to="https://x.com/LlpOriginal" target="_blank">
                 <FaXTwitter />
               </Link>
-              <Link to="https://www.linkedin.com/in/original-innovation-llp-794968313/" target="_blank">
+              <Link to="https://www.instagram.com/original_innovation_llp" target="_blank">
                 <FaInstagramSquare />
               </Link>
-              <Link to="https://www.instagram.com/original_innovation_llp" target="_blank">
+              <Link to="https://www.linkedin.com/in/original-innovation-llp-794968313/" target="_blank">
                 <FaLinkedinIn />
               </Link>
+              
             </div>
           </div>
           <div className="footer-col wide">
