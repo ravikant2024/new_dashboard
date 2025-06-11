@@ -62,7 +62,6 @@ const Footer = () => {
               <Link to="https://www.linkedin.com/in/original-innovation-llp-794968313/" target="_blank">
                 <FaLinkedinIn />
               </Link>
-              
             </div>
           </div>
           <div className="footer-col wide">
