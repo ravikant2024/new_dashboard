@@ -64,6 +64,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
+          
           <div className="footer-col wide">
             <h4>Registered Office Address:</h4>
             <p>
