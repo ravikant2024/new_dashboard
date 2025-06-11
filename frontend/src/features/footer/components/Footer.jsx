@@ -81,7 +81,7 @@ const Footer = () => {
       <hr className="footer-divider" />
       <div className="footer-bottom">
         <div className="footer-left-links">
-          <span>©2025 Original Innovation LLP33</span>
+          <span>©2025 Original Innovation LLP</span>
         </div>
       </div>
     </footer>

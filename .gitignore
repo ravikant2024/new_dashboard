@@ -70,3 +70,5 @@ Thumbs.db
 # .env
 .env
 /frontend/Dockerfile
+/frontend/.dockerignore
+/backend/ssl
