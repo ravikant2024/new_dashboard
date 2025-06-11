@@ -67,9 +67,10 @@ Thumbs.db
 /tools/postgres_backup
 /tools/elastic_data
 /tools/kb_data
+/tools/docker-compose.yaml
 # .env
 .env
-# /frontend/Dockerfile
+/frontend/Dockerfile
 /frontend/.dockerignore
 /backend/ssl
 /whatsapp_server/ssl
