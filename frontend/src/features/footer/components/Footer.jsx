@@ -45,7 +45,7 @@ const Footer = () => {
               490,Udyog Vihar Phase V,<br /> Gurgoan, Haryana - 122016.
               <br />
               engineering@orginv8.com<br />
-              Telephone: +919599466635
+              Mobile: +919599466635
             </p>
             <h4>Social:</h4>
             <div className="footer-social-icons">
@@ -73,8 +73,8 @@ const Footer = () => {
               School Road, Khanpur,
               <br />New Delhi -
               110062.<br />
-              CIN : ACH-8144<br />
-              Telephone: +919599466635
+              CIN :U62013MH2023PTC411571<br />
+              Mobile: +919599466635
             </p>
           </div>
         </div>

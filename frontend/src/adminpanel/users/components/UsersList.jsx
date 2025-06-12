@@ -33,7 +33,7 @@ const UsersList = () => {
 
     return (
         <Box sx={{ padding: 2, marginTop: 2 }}>
-            <Typography variant="h5" gutterBottom sx={{ color: 'white', textAlign: 'center', marginBottom: 4 }}>
+            <Typography variant="h5" gutterBottom sx={{ color: 'black', textAlign: 'center', marginBottom: 4 }}>
                 User List
             </Typography>
 

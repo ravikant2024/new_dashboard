@@ -1,5 +1,3 @@
-// src/components/ContactUs.jsx
-
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './contact.css';
@@ -17,12 +15,11 @@ const ContactUs = () => {
   const dispatch = useDispatch();
   const error = useSelector(selectContactError);
   const status = useSelector(selectContactStatus);
+
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "instant"
-    })
-  }, [])
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -42,10 +39,8 @@ const ContactUs = () => {
     if (status === 'fulfilled') {
       toast.success('Message sent successfully!');
       reset();
-
     } else if (error) {
       toast.error(`Failed to send message: ${error}`);
-
     }
   }, [status, error, dispatch, reset]);
 
@@ -60,7 +55,6 @@ const ContactUs = () => {
       <div className="contact-card">
         <h1>Contact Us</h1>
         <p className="sub-heading">Fill up the form below to send us a message.</p>
-
         <div className="contact-form">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="form-row">
@@ -125,7 +119,7 @@ const ContactUs = () => {
                 <input
                   type="text"
                   maxLength={12}
-                     id="phone"
+                  id="phone"
                   placeholder="Enter phone number"
                   {...register('phone', {
                     required: 'Phone Number is required',
@@ -150,6 +144,39 @@ const ContactUs = () => {
               </div>
             </div>
 
+            {/* New Row: Company Name and Address */}
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="company">Company Name (Optional)</label>
+                <input
+                  type="text"
+                  placeholder="Enter your company name"
+                  {...register('company', {
+                    maxLength: {
+                      value: 100,
+                      message: 'Company name is too long',
+                    },
+                  })}
+                />
+                {errors.company && <p className="error-message">{errors.company.message}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <input
+                  type="text"
+                  placeholder="Enter your address"
+                  {...register('address', {
+                    required: 'Address is required',
+                    maxLength: {
+                      value: 200,
+                      message: 'Address is too long',
+                    },
+                  })}
+                />
+                {errors.address && <p className="error-message">{errors.address.message}</p>}
+              </div>
+            </div>
+
             <div className="form-group full-width">
               <label htmlFor="message">Your Message</label>
               <textarea
@@ -162,7 +189,7 @@ const ContactUs = () => {
               {errors.message && <p className="error-message">{errors.message.message}</p>}
             </div>
 
-            <button type="submit" className="submit-button" >
+            <button type="submit" className="submit-button">
               Send Message
             </button>
           </form>

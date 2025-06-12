@@ -18,6 +18,14 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  company: {
+    type: String,
+    default: '',
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   message: {
     type: String,
     required: true,

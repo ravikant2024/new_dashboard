@@ -58,6 +58,7 @@ import PrivacyPolicy from './features/privacyPolicy/PrivacyPolicy';
 import ShippingPolicy from './features/shippingPolicy/ShippingPolicy';
 import ConditionalRoot from './layout/ConditionRoot';
 import SearchProductListPage from './pages/SearchProductListPage';
+import ContactUserPage from './adminpanel/pages/ContactUserPage';
 function App() {
   const loggedInUser = useSelector(selectLoggedInUser);
   useAuthCheck();
@@ -124,6 +125,7 @@ function App() {
           <Route path="category-list" element={<ListCategoryPage />} />
           <Route path="add-blog" element={<AddBlogPage />} />
           <Route path="blog-list" element={<BlogList />} />
+          <Route path="contact-us-user-list" element={<ContactUserPage />} />
         </Route>
 
         {/* Payment Page */}

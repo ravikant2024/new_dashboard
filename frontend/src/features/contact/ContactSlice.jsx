@@ -1,6 +1,6 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { contact } from './ContactApi';
+import { contact, getAllContacts } from './ContactApi';
 
 const initialState = {
   status: 'idle',
@@ -13,6 +13,11 @@ export const createContactAsync = createAsyncThunk('create/createContactAsync', 
   const contactData = await contact(data);
   return contactData;
 });
+export const fetchAllContactsAsync = createAsyncThunk('contact/fetchAllContactsAsync',async () => {
+      const contacts = await getAllContacts();
+      return contacts    
+  }
+);
 
 const contactSlice = createSlice({
   name: 'contact',
@@ -40,6 +45,18 @@ const contactSlice = createSlice({
         state.status = 'rejected';
         state.success = false;
         state.error = action.payload;
+      })
+          .addCase(fetchAllContactsAsync.pending, (state) => {
+        state.fetchStatus = 'loading';
+        state.fetchError = null;
+      })
+      .addCase(fetchAllContactsAsync.fulfilled, (state, action) => {
+        state.fetchStatus = 'fulfilled';
+        state.allContacts = action.payload.data; // assuming response = { success, data }
+      })
+      .addCase(fetchAllContactsAsync.rejected, (state, action) => {
+        state.fetchStatus = 'rejected';
+        state.fetchError = action.payload;
       });
   },
 });
@@ -51,6 +68,8 @@ export const {
 export const selectContactStatus = (state) => state.contact.status;
 export const selectContactSuccess = (state) => state.contact.success;
 export const selectContactError = (state) => state.contact.error;
+export const selectAllContacts = (state) => state.contact.allContacts;
+export const selectFetchStatus = (state) => state.contact.fetchStatus;
 
 
 export default contactSlice.reducer;

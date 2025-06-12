@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaTelegramPlane, FaWhatsapp, FaComments, FaRegCalendarAlt } from "react-icons/fa";
+import { FaFacebookF, FaTelegramPlane, FaWhatsapp, FaComments, FaRegCalendarAlt } from "react-icons/fa";
 import { LiaBlogSolid } from "react-icons/lia";
 import { useDispatch, useSelector } from 'react-redux';
 import {  fetchAllBlogsAsync, selectAllBlogs } from '../BlogSlice';
 import Comment from '../../comment/components/Comment';
 import { fetchAllComments, selectComments } from '../../comment/CommentSlice';
 import "./BlogDetails.css"
+import { FaXTwitter } from 'react-icons/fa6';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -32,10 +33,10 @@ const BlogDetails = () => {
         <div className="blog-details-wrapper">
             {/* Social Icons */}
             <div className="left-icons">
-                <Link to="https://www.facebook.com/profile.php?id=61566401565182"><FaFacebookF size={30} /></Link>
-                <Link to="https://x.com/LlpOriginal"><FaTwitter size={30} /></Link>
-                <Link to="#"><FaTelegramPlane size={30} /></Link>
-                <Link to=""><FaWhatsapp size={30} /></Link>
+                <Link to="https://www.facebook.com/profile.php?id=61566401565182" target="_blank"><FaFacebookF size={30} /></Link>
+                <Link to="https://x.com/LlpOriginal" target="_blank"><FaXTwitter size={30} /></Link>
+                <Link to="https://web.telegram.org/k/" target="_blank"><FaTelegramPlane size={30} /></Link>
+                <Link to="https://web.whatsapp.com/" target="_blank"><FaWhatsapp size={30} /></Link>
             </div>
 
             <div className="blog-container">

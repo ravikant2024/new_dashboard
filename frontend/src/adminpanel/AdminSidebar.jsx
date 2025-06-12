@@ -29,6 +29,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { useNavigate } from 'react-router-dom';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   color: 'white',
@@ -64,7 +65,6 @@ const AdminSidebar = () => {
 
   const handleSelect = (item) => {
     setSelected(item);
-
     if (item !== 'Products' && item !== 'Add Brand' && item !== 'Add Category') {
       setOpen({});
     }
@@ -85,20 +85,17 @@ const AdminSidebar = () => {
       navigate("add-coupon")
     }else if(item==="Coupon List"){
       navigate("list-coupon")
-    }
-    else if(item==="Users List"){
+    }else if(item==="Users List"){
       navigate("users-list")
-    }
-    else if(item==="Category List"){
+    }else if(item==="Category List"){
       navigate("category-list")
-    }
-    else if(item==="Add Blog"){
+    }else if(item==="Add Blog"){
       navigate("add-blog")
-    }
-    else if(item==="Blog List"){
+    }else if(item==="Blog List"){
       navigate("blog-list")
+    }else if(item==="Contact-Us"){
+      navigate("contact-us-user-list")
     }
-   
   };
 
   const handleOpenToggle = (e) => {
@@ -118,6 +115,7 @@ const AdminSidebar = () => {
     { text: 'Icons', icon: <ImageIcon />, items: ['Material Icons', 'Font Awesome Icons'] },
     { text: 'Users', icon: <PeopleIcon />, items: ['Users List'] },
     { text: 'Blog', icon: <PostAddIcon />, items: ['Add Blog','Blog List'] },
+    { text: 'Contact-us', icon: <ContactMailIcon />,items: ['Contact-Us'] },
     { text: 'More', items: [] },
   ];
 

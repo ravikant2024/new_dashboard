@@ -8,3 +8,11 @@ export const contact = async (data) => {
     throw error.response?.data || 'Message failed';
   }
 };
+export const getAllContacts = async () => {
+  try {
+    const res = await axiosInstance.get('/contactus');
+    return res.data;
+  } catch (error) {
+    throw error.response?.data || 'Failed to fetch contacts';
+  }
+};
