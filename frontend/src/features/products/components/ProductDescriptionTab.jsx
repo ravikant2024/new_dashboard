@@ -1,14 +1,12 @@
 import React from 'react';
 import "../../products/components/ProductDescriptionTab.css";
 
-
 const parseDescription = (description) => {
   const result = {};
   const lines = description.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
 
   let currentSection = "intro";
   result[currentSection] = "";
-
   lines.forEach((line) => {
     const isNewSection = /^[A-Za-z ]+:?$/.test(line); 
     if (isNewSection) {

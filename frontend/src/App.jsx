@@ -59,6 +59,8 @@ import ShippingPolicy from './features/shippingPolicy/ShippingPolicy';
 import ConditionalRoot from './layout/ConditionRoot';
 import SearchProductListPage from './pages/SearchProductListPage';
 import ContactUserPage from './adminpanel/pages/ContactUserPage';
+import BulkEnquiryFormpage from './pages/BulkEnquiryFormpage';
+import BulkEnquiryListPage from './adminpanel/pages/BulkEnquiryListPage';
 function App() {
   const loggedInUser = useSelector(selectLoggedInUser);
   useAuthCheck();
@@ -91,6 +93,7 @@ function App() {
           <Route path='view-all-blogs' element={<ViewAllBlogPage />} />
           <Route path='view-all-video' element={<ViewAllVideoPage />} />
           <Route path='search-product-list' element={<SearchProductListPage />} />
+          <Route path='bulk-enquiry/enquiry' element={<BulkEnquiryFormpage />} />
 
           {/* Protected Routes */}
           <Route path="cart" element={<Protected><CartPage /></Protected>} />
@@ -125,9 +128,9 @@ function App() {
           <Route path="category-list" element={<ListCategoryPage />} />
           <Route path="add-blog" element={<AddBlogPage />} />
           <Route path="blog-list" element={<BlogList />} />
-          <Route path="contact-us-user-list" element={<ContactUserPage />} />
+          <Route path="contactus-user-list" element={<ContactUserPage />} />
+          <Route path="bulk-enquiry-list" element={<BulkEnquiryListPage />} />
         </Route>
-
         {/* Payment Page */}
         <Route path="/payment_page" element={<PaymentPage />} />
       </Routes>

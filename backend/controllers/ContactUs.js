@@ -1,11 +1,11 @@
-const Contact = require('../models/ContactUs');
+const Contact = require('../models/BulkEnquiry');
 const nodemailer = require("nodemailer");
 const create = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, message, company, address } = req.body;
 
     const newContact = new Contact({ firstName, lastName, email, phone, message, company, address });
-    console.log("newContact",newContact)
+
     await newContact.save();
     const transporter = nodemailer.createTransport({
       host: 'mail.orginv8.com',
@@ -50,6 +50,7 @@ const create = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
+    console.log("contacts Ravi",contacts)
     res.status(200).json({
       success: true,
       data: contacts,

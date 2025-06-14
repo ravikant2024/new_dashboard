@@ -1,21 +1,21 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
-import { fetchAllContactsAsync, selectAllContacts } from '../../features/contact/ContactSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllBulkEnquiryAsync, selectAllBulkEnquiry } from '../../features/bulkEnquiry/BulkEnquirySlice';
 
-const ContactUserList = () => {
+const BulkEnquiryList = () => {
     const dispatch = useDispatch()
-    const contacts = useSelector(selectAllContacts);
+    const bulkEnquiryData = useSelector(selectAllBulkEnquiry);
 
     useEffect(() => {
-        dispatch(fetchAllContactsAsync());
+        dispatch(fetchAllBulkEnquiryAsync());
     }, [dispatch]);
 
     return (
         <div>
             <Box sx={{ padding: 2, marginTop: 2 }}>
                 <Typography variant="h5" gutterBottom sx={{ color: 'black', textAlign: 'center', marginBottom: 4 }}>
-                    User Contact Us List
+                    Bulk Enquiry List
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="user list table">
@@ -29,10 +29,11 @@ const ContactUserList = () => {
                                 <TableCell sx={{ fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>Phone</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>Company Name</TableCell>
                                 <TableCell sx={{ fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>Address</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', fontFamily: 'Arial, sans-serif' }}>GST</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {contacts?.map((user, index) => (
+                            {bulkEnquiryData?.map((user, index) => (
                                 <TableRow key={user._id}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{user.firstName}</TableCell>
@@ -44,6 +45,7 @@ const ContactUserList = () => {
                                     <TableCell>{user.phone}</TableCell>
                                     <TableCell>{user.address}</TableCell>
                                     <TableCell>{user.company}</TableCell>
+                                    <TableCell>{user.gst}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -55,4 +57,4 @@ const ContactUserList = () => {
     )
 }
 
-export default ContactUserList
+export default BulkEnquiryList

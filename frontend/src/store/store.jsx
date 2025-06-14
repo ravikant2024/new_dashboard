@@ -15,6 +15,7 @@ import couponReducer from "../adminpanel/coupon/CouponSlice";
 import blogReducer from '../features/blogs/BlogSlice';
 import commentReducer from '../features/comment/CommentSlice';
 import contactReducer from '../features/contact/ContactSlice';
+import bulkEnquiryReducer from '../features/bulkEnquiry/BulkEnquirySlice';
 
 const store = configureStore({
   reducer: {
@@ -33,6 +34,7 @@ const store = configureStore({
     blogSlice: blogReducer,
     comments: commentReducer,
     contact: contactReducer,
+    bulkEnquiry: bulkEnquiryReducer,
   },
   // Redux Toolkit includes redux-thunk by default, so no need to specify middleware unless you add custom ones.
 });

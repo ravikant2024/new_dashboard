@@ -48,12 +48,12 @@
 
 /* Styling for the card header */
 .product-card-name {
-    /* padding: 27px; */
     padding: 7px;
-    margin-left: 12px;
     font-size: 0.8rem;
     color: #666;
     height: auto;
+    text-align: left;
+    margin-left: 10px;
 }
 
 /* Styling for the card image */
@@ -73,7 +73,7 @@
 
 /* Styling for the card content */
 .product-card-discription {
-    padding-left: 17px;
+    padding-left: 13px;
     padding-top: 5px;
     padding-bottom: 5px;
     flex-grow: 1;

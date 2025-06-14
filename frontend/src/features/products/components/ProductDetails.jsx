@@ -141,27 +141,26 @@ const ProductDetails = () => {
     };
 
     // Pass product and quantity as parameters
-  const handleBuyNow = (product, quantity = 1) => {
-  const isGuestUser = loggedInUser?._id === import.meta.env.VITE_GUESTUSER_ID;
+    const handleBuyNow = (product, quantity = 1) => {
+        const isGuestUser = loggedInUser?._id === import.meta.env.VITE_GUESTUSER_ID;
 
-  if (loggedInUser && !isGuestUser) {
-    const checkoutData = {
-      product: {
-        _id: product._id,
-        title: product.title,
-        price: product.price,
-        discountPercentage: product.discountPercentage,
-        thumbnail: product.thumbnail,
-      },
-      quantity,
+        if (loggedInUser && !isGuestUser) {
+            const checkoutData = {
+                product: {
+                    _id: product._id,
+                    title: product.title,
+                    price: product.price,
+                    discountPercentage: product.discountPercentage,
+                    thumbnail: product.thumbnail,
+                },
+                quantity,
+            };
+            navigate('/checkout', { state: checkoutData });
+        } else {
+            toast.error("Please login first to buy this product");
+            navigate('/my-account');
+        }
     };
-
-    navigate('/checkout', { state: checkoutData });
-  } else {
-    toast.error("Please login first to buy this product");
-    navigate('/my-account');
-  }
-};
 
     const handleGoToCart = () => {
         navigate('/cart');
@@ -191,31 +190,7 @@ const ProductDetails = () => {
     if (!rawSpecs) {
         return <div>Loading specifications...</div>;
     }
-    // const parseSpecs = (text) => {
-    //     const lines = text.split("\r\n");
-    //     const result = [];
-    //     let currentKey = null;
 
-    //     for (let line of lines) {
-    //         if (line.includes(":")) {
-    //             const [key, ...rest] = line.split(":");
-    //             currentKey = key.trim();
-    //             result.push({ key: currentKey, value: rest.join(":").trim() });
-    //         } else if (currentKey) {
-    //             result[result.length - 1].value += " " + line.trim();
-    //         }
-    //     }
-    //     return result;
-    // };
-
-    // // 🟡 Function to pick any 4 unique items randomly
-    // const getRandomSpecs = (specsArray, count = 4) => {
-    //     const shuffled = [...specsArray].sort(() => 0.5 - Math.random());
-    //     return shuffled.slice(0, count);
-    // };
-
-    // // ✅ Safely parse only if rawSpecs is defined
-    // const parsedSpecs = rawSpecs ? getRandomSpecs(parseSpecs(rawSpecs), 4) : [];
 
     const parseDescription = (product) => {
         const result = {};
@@ -242,6 +217,7 @@ const ProductDetails = () => {
     };
 
     const parsed = parseDescription(product);
+    const features = parsed?.FEATURE || parsed?.Feature;
     return (
         <>
             <div className="product-page">
@@ -270,19 +246,22 @@ const ProductDetails = () => {
                         <div className="image-gallery">
                             <img src={selectedImage} alt="Main Product" className="main-image" />
                             <div className="thumbnail-group">
-
                                 {product?.images.map((img, index) => (
-                                    <img
+                                    <div
                                         key={img}
-                                        src={img}
-                                        alt={`Thumbnail ${index}`}
-                                        className={`thumbnail ${selectedImage === img ? 'active' : ''}`}
+                                        className={`thumbnail-wrapper ${selectedImage === img ? 'active' : ''}`}
                                         onClick={() => handleImageShow(img)}
-                                    />
+                                    >
+                                        <img
+                                            src={img}
+                                            alt={`Thumbnail ${index}`}
+                                            className="thumbnail"
+                                        />
+                                    </div>
                                 ))}
-
                             </div>
-                            {videoId && (
+
+                            {/* {videoId && (
                                 <div style={{ marginTop: '45px' }}>
                                     <iframe
                                         width="100%"
@@ -296,7 +275,7 @@ const ProductDetails = () => {
                                     ></iframe>
                                 </div>
 
-                            )}
+                            )} */}
                         </div>
                         {/* Product Info Section */}
                         <div className="product-info">
@@ -323,15 +302,15 @@ const ProductDetails = () => {
                                 </p>
                                 <hr />
                                 <p className="sku">SKU: {product?.sku}</p>
-                                {Array.isArray(parsed?.Features) && (
+                                {/* {Array.isArray(features) && features.length > 0 && (
                                     <ul className="specs-list">
-                                        {parsed.Features.map((item, index) => (
+                                        {features.map((item, index) => (
                                             <li key={index} className="specs-item">
                                                 <span className="specs-value">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
-                                )}
+                                )} */}
 
                                 <div className="price">
                                     {product?.discountPercentage > 0 ? (
@@ -342,8 +321,8 @@ const ProductDetails = () => {
                                         </>
                                     ) : (
                                         <>
-                                            <span>₹{product?.price}.00</span>
-                                            <span>(Incl. GST)</span>
+                                            <span style={{ fontSize: '20px' }}>₹{product?.price}.00</span>
+                                            <span style={{ fontSize: '14px' }}>(Incl. GST)</span>
                                         </>
                                     )}
                                 </div>
@@ -375,28 +354,20 @@ const ProductDetails = () => {
                                 <div className="shipping-bar">
                                     <div className="features">
                                         <div className="feature-item">
-                                            <div>
-                                                Have a Bulk Order?<br />
-                                                <Link to="/bulk-enquiry">Click Here</Link>
-                                            </div>
-                                        </div>
-                                        <div className="feature-item">
+                                            Have a Bulk Order?<br />
+                                            <Link to="/bulk-enquiry" style={{ marginTop: '3px' }}>Click Here</Link>
 
-                                            <div>
-                                                Need Support?<br />
-                                                <Link to="/contact-us">Click Here</Link>
-                                            </div>
                                         </div>
                                         <div className="feature-item">
-                                            <div>
-                                                Free Delivery<br />above ₹499
-                                            </div>
+                                            Need Support?<br />
+                                            <Link to="/contact-us" style={{ marginTop: '3px' }}>Click Here</Link>
                                         </div>
                                         <div className="feature-item">
-                                            <div>1 years Warranty</div>
+                                            Free Delivery<br />above ₹499
                                         </div>
-                                        <div className="feature-item">
-                                            <div>Cash on Delivery*</div>
+                                        <div style={{ display: 'flex', gap: '16px', marginTop: '-13px' }}>
+                                            <div>1 year Warranty</div>
+                                            <div>Cash on Delivery</div>
                                         </div>
                                     </div>
                                     <hr />
@@ -412,7 +383,7 @@ const ProductDetails = () => {
                     </div>
 
                     {/* New section  for product description and review */}
-                    <div className="tab-section">
+                    <div className="tab-section ">
                         <div className="tabs">
                             {tabs.map((tab) => (
                                 <Link

@@ -94,12 +94,13 @@ const AdminSidebar = () => {
     }else if(item==="Blog List"){
       navigate("blog-list")
     }else if(item==="Contact-Us"){
-      navigate("contact-us-user-list")
+      navigate("contactus-user-list")
+    }else if(item==="Bulk Enquiry"){
+      navigate("bulk-enquiry-list")
     }
   };
 
   const handleOpenToggle = (e) => {
-   
   };
 
   const handleCloseToogle = (e) => {
@@ -115,7 +116,7 @@ const AdminSidebar = () => {
     { text: 'Icons', icon: <ImageIcon />, items: ['Material Icons', 'Font Awesome Icons'] },
     { text: 'Users', icon: <PeopleIcon />, items: ['Users List'] },
     { text: 'Blog', icon: <PostAddIcon />, items: ['Add Blog','Blog List'] },
-    { text: 'Contact-us', icon: <ContactMailIcon />,items: ['Contact-Us'] },
+    { text: 'Contact-us', icon: <ContactMailIcon />,items: ['Contact-Us','Bulk Enquiry'] },
     { text: 'More', items: [] },
   ];
 

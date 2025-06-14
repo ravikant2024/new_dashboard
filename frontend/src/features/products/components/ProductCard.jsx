@@ -75,12 +75,12 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                 <div>
                     <div className="product-card-details" onClick={() => navigate(`/product-details/${id}`)}>
                         <h3 className="product-card-name">
-                            {title && title.length > 25 ? title.slice(0, 25) + '...' : title}
+                            {title && title.length > 40 ? title.slice(0, 40) + '...' : title}
                         </h3>
                         <img src={thumbnail} alt="product" className="product-card-image" />
                         <p className="product-card-discription">
-                            {description && description.length > 50
-                                ? description.slice(0, 50) + '...'
+                            {description && description.length > 60
+                                ? description.slice(0, 60) + '...'
                                 : description}
                         </p>
 
