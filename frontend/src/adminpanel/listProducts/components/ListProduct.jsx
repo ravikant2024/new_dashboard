@@ -8,6 +8,7 @@ import EditProduct from './EditProduct';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
 import { ITEMS_PER_PAGE_ADMIN } from '../../../constants';
+import { useNavigate } from "react-router"
 
 const headers = [
   { label: 'S.No', width: '10%' },
@@ -33,6 +34,7 @@ const List = styled('ul')({
 });
 const ListProduct = () => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate()
   const productItems = useSelector(selectProducts);
   const totalResults = useSelector(selectProductTotalResults);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -87,11 +89,9 @@ const ListProduct = () => {
     handleMenuClose();
   };
 
-
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setEditProductId(null);
-
   };
 
   // Filter products based on search term
@@ -119,20 +119,28 @@ const ListProduct = () => {
   return (
     <>
       <div style={{ backgroundColor: 'white', padding: '2px' }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ marginTop: 3, marginLeft: 3, marginRight: 4 }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ marginTop: 3, marginLeft: 2, marginRight: 1 }}>
           <Typography variant="h5" gutterBottom style={{ textAlign: 'left' }}>
             Product List
           </Typography>
-          <Typography variant="h5" gutterBottom style={{ textAlign: 'right' }}>
+
+          <Typography variant="h5" gutterBottom style={{ alignItems: 'center',marginLeft:'250px' }}>
             <TextField
               variant="outlined"
               size="small"
-              sx={{ width: 230 }}
+              sx={{ width: 250 }}
               placeholder="Search here"
               value={searchTerm}
               onChange={handleSearchChange}
             />
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ ml: 'auto', mr: 0 }}
+            onClick={() => Navigate('/admin-dashboard/add-products')} >
+            Add Product
+          </Button>
         </Box>
 
         {/* Header Section with Box */}
@@ -145,19 +153,13 @@ const ListProduct = () => {
             </Box>
           ))}
         </Box>
-
-        {/* Product Data Rows */}
         {filteredProducts?.map((product, index) => {
           return (
             <Box key={product._id}>
-              {/* Product Information Row */}
               <Box display="flex" justifyContent="space-between" alignItems="center" marginTop='10px'>
-                {/* Index */}
                 <Box sx={{ width: '6%', textAlign: 'center' }}>
                   <Typography >{index + 1}</Typography>
                 </Box>
-
-                {/* Thumbnail Image */}
                 <Box sx={{ width: '12%', textAlign: 'center' }}>
                   <img
                     src={product.thumbnail}
@@ -166,61 +168,42 @@ const ListProduct = () => {
                   />
                 </Box>
 
-                {/* Product Title */}
                 <Box sx={{ width: '23%', textAlign: 'center' }}>
                   <Typography >{product.title}</Typography>
                 </Box>
-
-                {/* Product Price */}
                 <Box sx={{ width: '12%', textAlign: 'center' }}>
                   <Typography >₹{product.price}</Typography>
                 </Box>
-
-                {/* Discount Percentage */}
                 <Box sx={{ width: '10%', textAlign: 'center' }}>
                   {product.discountPercentage > 0 && (
                     <Typography>{product.discountPercentage}%</Typography>
                   )}
                 </Box>
-
-
-
-                {/* Product Category */}
                 <Box sx={{ width: '12%', textAlign: 'center' }}>
                   <Typography >{product.category}</Typography>
                 </Box>
 
-                {/* Product Brand */}
                 <Box sx={{ width: '15%', textAlign: 'center' }}>
                   <Typography>{product.brand}</Typography>
                 </Box>
 
-                {/* Product Stock Quantity */}
                 <Box sx={{ width: '8%', textAlign: 'center' }}>
                   <Typography >{product.stockQuantity}</Typography>
                 </Box>
-
-                {/* Product SKU */}
                 <Box sx={{ width: '20%', textAlign: 'center' }}>
                   <Typography >{product.sku}</Typography>
                 </Box>
-
-                {/* More Options Button */}
                 <Box sx={{ width: '8%', textAlign: 'center' }}>
                   <Button onClick={(e) => handleMenuClick(e, product)}>
                     <MoreVertIcon />
                   </Button>
                 </Box>
               </Box>
-
-              {/* Divider between products */}
               <Divider sx={{ marginY: 1 }} />
-
-              {/* Menu for Edit, Delete, and More */}
               <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
                 <MenuItem onClick={handleEditProduct}>Edit</MenuItem>
                 <MenuItem onClick={handleDelete}>Delete</MenuItem>
-                <MenuItem onClick={handleMenuClose}>More</MenuItem>
+                {/* <MenuItem onClick={handleMenuClose}>More</MenuItem> */}
               </Menu>
             </Box>
           );
@@ -228,41 +211,41 @@ const ListProduct = () => {
 
         {/* Pagination  */}
         {items.length > 0 && (
-  <List>
-    {items.map(({ page, type, selected, ...item }, index) => {
-      let children = null;
+          <List>
+            {items.map(({ page, type, selected, ...item }, index) => {
+              let children = null;
 
-      if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-        children = '…';
-      } else if (type === 'page') {
-        children = (
-          <button
-            type="button"
-            style={{
-              fontWeight: selected ? 'bold' : 'normal',
-              backgroundColor: selected ? '#007bff' : 'transparent',
-              color: selected ? '#fff' : '#000',
-              border: selected ? '1px solid #007bff' : '1px solid #ccc',
-              padding: '5px 10px',
-              borderRadius: '5px',
-            }}
-            {...item}
-          >
-            {page}
-          </button>
-        );
-      } else {
-        children = (
-          <button type="button" {...item}>
-            {type.toUpperCase()}
-          </button>
-        );
-      }
+              if (type === 'start-ellipsis' || type === 'end-ellipsis') {
+                children = '…';
+              } else if (type === 'page') {
+                children = (
+                  <button
+                    type="button"
+                    style={{
+                      fontWeight: selected ? 'bold' : 'normal',
+                      backgroundColor: selected ? '#007bff' : 'transparent',
+                      color: selected ? '#fff' : '#000',
+                      border: selected ? '1px solid #007bff' : '1px solid #ccc',
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                    }}
+                    {...item}
+                  >
+                    {page}
+                  </button>
+                );
+              } else {
+                children = (
+                  <button type="button" {...item}>
+                    {type.toUpperCase()}
+                  </button>
+                );
+              }
 
-      return <li key={index}>{children}</li>;
-    })}
-  </List>
-)}
+              return <li key={index}>{children}</li>;
+            })}
+          </List>
+        )}
 
       </div>
 

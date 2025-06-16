@@ -79,8 +79,8 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                         </h3>
                         <img src={thumbnail} alt="product" className="product-card-image" />
                         <p className="product-card-discription">
-                            {description && description.length > 60
-                                ? description.slice(0, 60) + '...'
+                            {description && description.length > 55
+                                ? description.slice(0, 55) + '...'
                                 : description}
                         </p>
 
@@ -107,9 +107,9 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                         <div className="price-left">
                             <span className="product-card-price">
                                 ₹ {priceAfterDiscount}
-                                {!discountPercentage &&
+                                {/* {!discountPercentage &&
                                     <span className="gst-info">(Incl. GST)</span>
-                                }
+                                } */}
                             </span>
                             {discountPercentage > 0 && (
                                 <div className="price-container">

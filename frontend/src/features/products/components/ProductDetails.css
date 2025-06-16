@@ -177,9 +177,9 @@
 }
 
 .price {
-  font-size: 2em;
+  font-size: 1.5em;
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: rgb(9, 0, 0);
 }
 
@@ -207,7 +207,7 @@
 }
 
 .low-stock-product span {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .add-actions {

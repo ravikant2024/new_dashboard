@@ -317,12 +317,12 @@ const ProductDetails = () => {
                                         <>
                                             <span className="discounted-price ">₹{Math.round(priceAfterDiscount)}.00</span>
                                             <span className="original-price">₹{product?.price}.00</span>
-                                            <span className="gst">(Incl. GST)</span>
+                                            {/* <span className="gst">(Incl. GST)</span> */}
                                         </>
                                     ) : (
                                         <>
                                             <span style={{ fontSize: '20px' }}>₹{product?.price}.00</span>
-                                            <span style={{ fontSize: '14px' }}>(Incl. GST)</span>
+                                            {/* <span style={{ fontSize: '14px' }}>(Incl. GST)</span> */}
                                         </>
                                     )}
                                 </div>
