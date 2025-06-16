@@ -12,12 +12,10 @@ import {
     resetCartItemRemoveStatus,
 } from '../CartSlice';
 
-
 const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
-    console.log("cartItems",cartItems)
     const cartItemRemoveStatus = useSelector(selectCartItemRemoveStatus);
     const cartitemsQty = cartItems.filter(item => item.quantity > 0);
 
@@ -27,8 +25,6 @@ const Cart = () => {
             behavior: "instant"
         });
     }, []);
-
-
     // Calculate cart total
     const calculateTotal = () => {
         return cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
@@ -37,7 +33,6 @@ const Cart = () => {
     const handleRuturnHompage = () => {
         navigate('/');
     };
-
     // Handle remove item from cart
     const handleRemoveItems = (id) => {
         const deleteItems = cartItems.find(item => item._id === id);

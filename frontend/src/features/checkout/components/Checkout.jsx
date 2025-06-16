@@ -17,8 +17,8 @@ import { SHIPPING, TAXES } from '../../../constants';
 import { CustomStorageManager } from '../../../classes/storageManager';
 import { checkCouponCodeIssue, getAllCoupon } from '../../../adminpanel/coupon/CouponApi';
 import { getAllCouponAsync, selectAllCoupons } from "../../../adminpanel/coupon/CouponSlice"
-const baseURL = import.meta.env.VITE_API_BASE_URL_FRONTEND;
 
+ const baseURL=import.meta.env.VITE_API_BASE_URL_FRONTEND
 const Checkout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -338,11 +338,10 @@ const Checkout = () => {
             quantity: item.quantity,
           })),
         }
-
         const payload = {
           address: order.address,
           products: order.item,
-          returnUrl: baseURL,
+          returnUrl: `${baseURL}/order-success`,
           userId: order.user,
           guestFlag: order.guestFlag,
           paymentMode: selectedPaymentMethod,
@@ -371,7 +370,7 @@ const Checkout = () => {
         const payload = {
           address: address,
           products: order.item,
-          returnUrl: baseURL,
+          returnUrl: `${baseURL}/order-success`,
           userId: order.user,
           guestFlag: order.guestFlag,
           paymentMode: selectedPaymentMethod,

@@ -9,7 +9,8 @@ import Loader from "react-js-loader";
 import { selectUserInfo } from '../features/user/UserSlice';
 
 let hitFlag = 0;
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+ const backendbaseURL=import.meta.env.VITE_API_BASE_URL
+ console.log("backendbaseURL",backendbaseURL)
 const OrderSuccess = () => {
     const location = useLocation();
     const dispatch = useDispatch();
@@ -62,7 +63,7 @@ const OrderSuccess = () => {
                 };
 
                 try {
-                    const res = await axiosInstance.post(`${baseURL}/orders`, newOrder);
+                    const res = await axiosInstance.post(`${backendbaseURL}/orders`, newOrder);
                     setOrderId(res.data._id);
                     const paymentStatus = res.data.paymentDetails.ResponseCode;
 
