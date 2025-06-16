@@ -17,6 +17,7 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
+    console.log("cartItems",cartItems)
     const cartItemRemoveStatus = useSelector(selectCartItemRemoveStatus);
     const cartitemsQty = cartItems.filter(item => item.quantity > 0);
 

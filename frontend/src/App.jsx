@@ -61,6 +61,7 @@ import SearchProductListPage from './pages/SearchProductListPage';
 import ContactUserPage from './adminpanel/pages/ContactUserPage';
 import BulkEnquiryFormpage from './pages/BulkEnquiryFormpage';
 import BulkEnquiryListPage from './adminpanel/pages/BulkEnquiryListPage';
+import HelpCenterPage from './pages/HelpCenterPage';
 function App() {
   const loggedInUser = useSelector(selectLoggedInUser);
   useAuthCheck();
@@ -94,6 +95,7 @@ function App() {
           <Route path='view-all-video' element={<ViewAllVideoPage />} />
           <Route path='search-product-list' element={<SearchProductListPage />} />
           <Route path='bulk-enquiry/enquiry' element={<BulkEnquiryFormpage />} />
+           <Route path='helpcenter' element={<HelpCenterPage />} />
 
           {/* Protected Routes */}
           <Route path="cart" element={<Protected><CartPage /></Protected>} />

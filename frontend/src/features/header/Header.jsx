@@ -66,7 +66,7 @@ const Header = () => {
           {/* <FaPhoneAlt className="phone-icon" /> */}
           <h5 className="phone-number">+919599466635</h5>
           <span className="divider">|</span>
-          <a href="#" className="customer-support">Customer Support</a>
+          <Link to="/helpcenter" className="customer-support">Customer Support</Link>
         </div>
 
         <div className="right-section">
