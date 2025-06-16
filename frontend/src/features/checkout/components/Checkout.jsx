@@ -17,7 +17,7 @@ import { SHIPPING, TAXES } from '../../../constants';
 import { CustomStorageManager } from '../../../classes/storageManager';
 import { checkCouponCodeIssue, getAllCoupon } from '../../../adminpanel/coupon/CouponApi';
 import { getAllCouponAsync, selectAllCoupons } from "../../../adminpanel/coupon/CouponSlice"
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+const baseURL = import.meta.env.VITE_API_BASE_URL_FRONTEND;
 
 const Checkout = () => {
   const dispatch = useDispatch()
