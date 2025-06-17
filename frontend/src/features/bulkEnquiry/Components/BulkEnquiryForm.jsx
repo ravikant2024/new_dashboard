@@ -48,8 +48,8 @@ const BulkEnquiryForm = () => {
   return (
     <div className="contact-container">
       <div className="contact-card">
-        <h1>Bulk Enquiry Form</h1>
-        <p className="sub-heading">Fill up the form below to send us a message.</p>
+        <h2>Looking to buy something?</h2>
+        <p className="sub-heading">Tell us your requirment and get free quotes</p>
         <div className="contact-form">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="form-row">
@@ -185,8 +185,9 @@ const BulkEnquiryForm = () => {
               </div>
             </div>
             <div className="form-group full-width">
-              <label htmlFor="message">Your Message</label>
+              <label htmlFor="message">Enter Product</label>
               <textarea
+                className="textarea"
                 rows="5"
                 placeholder="Your Message"
                 {...register('message', {
@@ -195,6 +196,7 @@ const BulkEnquiryForm = () => {
               ></textarea>
               {errors.message && <p className="error-message">{errors.message.message}</p>}
             </div>
+
 
             <button type="submit" className="submit-button">
               Send Message

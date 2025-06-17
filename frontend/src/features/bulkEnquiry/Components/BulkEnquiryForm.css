@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.contact-card h1 {
+.contact-card h2 {
   color: #495057;
   text-align: center;
   margin-bottom: 10px;
@@ -46,7 +46,7 @@
   flex-wrap: wrap;
 }
 
-.form-row > .form-group {
+.form-row>.form-group {
   flex: 1;
   min-width: 250px;
 }
@@ -119,7 +119,7 @@ textarea:focus {
     flex-direction: column;
   }
 
-  .form-row > .form-group {
+  .form-row>.form-group {
     width: 100%;
     min-width: unset;
   }
@@ -147,7 +147,7 @@ textarea:focus {
     flex-direction: row;
   }
 
-  .form-row > .form-group {
+  .form-row>.form-group {
     min-width: 45%;
   }
 

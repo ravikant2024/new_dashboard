@@ -3,7 +3,7 @@ import './truckOrder.css';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ChangeOrderAddress from './ChangeOrderAddress';
-import { fetchOrderByIdAsync, resetCurrentOrder, resetOrderUpdateStatus, selectCurrentOrder, selectOrderUpdateStatus } from '../../orders/OrderSlice';
+import { fetchOrderByIdAsync, resetCurrentOrder, resetOrderUpdateStatus, selectOrderById, selectOrderUpdateStatus } from '../../orders/OrderSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const TrackOrderForm = () => {
@@ -12,7 +12,7 @@ const TrackOrderForm = () => {
   const [searchId, setSearchId] = useState('');
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [orderAddressData, setOrderAddressData] = useState();
-  const order = useSelector(selectCurrentOrder);
+  const order = useSelector(selectOrderById);
   const addressUpdateStatus = useSelector(selectOrderUpdateStatus)
 
   // Handle input change

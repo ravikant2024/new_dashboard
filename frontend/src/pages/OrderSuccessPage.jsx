@@ -1,20 +1,20 @@
 import React from 'react'
 import '../css/OrderSuccessPage.css'
 import { selectUserInfo } from '../features/user/UserSlice'
-import { resetCurrentOrder, selectCurrentOrder } from '../features/orders/OrderSlice'
+import { resetCurrentOrder, selectOrderById } from '../features/orders/OrderSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 const OrderSuccessPage = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
-  const currentOrder=useSelector(selectCurrentOrder)
+  const orderByIdData=useSelector(selectOrderById)
   const userDetails=useSelector(selectUserInfo)
 
   useEffect(()=>{
-      if(!currentOrder){
+      if(!orderByIdData){
           navigate("/")
       }
-  },[currentOrder])
+  },[orderByIdData])
   const handleButtonClick = () => {
     // dispatch(resetCurrentOrder());  
     navigate('/orders');  
@@ -29,7 +29,7 @@ const OrderSuccessPage = () => {
 
       <div className="order-success-details">
         <h6 className="greeting">Hey {userDetails?.name}</h6>
-        <h5 className="order-confirmation">Your Order #{currentOrder?._id} is confirmed</h5>
+        <h5 className="order-confirmation">Your Order #{orderByIdData?._id} is confirmed</h5>
         <p className="thank-you">Thank you for shopping with us❤️</p>
       </div>
 

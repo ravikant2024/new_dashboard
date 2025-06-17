@@ -19,14 +19,14 @@ exports.create = async (req, res) => {
         // If payment is successful, create the order
         const created = new Order({
             ...req.body,
-            query: [], // Initialize the query field as an empty array
+            query: [], 
             paymentDetails: verificationResult.data
         });
 
         const savedOrder = await created.save();
 
         const productDetails = savedOrder.item.map(({ product, quantity }) => {
-            const link = `${process.env.ORIGIN}/product-details/${product._id}`; // Ensure the link is constructed correctly
+            const link = `${process.env.ORIGIN}/product-details/${product._id}`; 
             return `
                 <li>
                     <b>Product:</b> <a href="${link}">${product.title}</a><br/>
@@ -108,7 +108,6 @@ exports.getAll = async (req, res) => {
 
         const totalDocs = await Order.find({}).countDocuments().exec();
         const results = await Order.find({}).skip(skip).limit(limit).exec();
-
         res.header("X-Total-Count", totalDocs);
         res.status(200).json(results);
 
@@ -133,17 +132,14 @@ exports.addMessage = async (req, res) => {
     try {
 
         const { sender, content, orderId } = req.body;
-
         const updatedOrder = await Order.findByIdAndUpdate(
             orderId,
             { $push: { query: { sender, content } } },
             { new: true }
         );
-
         if (!updatedOrder) {
             return res.status(404).json({ message: 'Order not found' });
         }
-
         res.status(200).json(updatedOrder);
     } catch (error) {
         console.log(error);
@@ -154,7 +150,6 @@ exports.initiatePayment = async (req, res) => {
 
     try {
         const { userId, products, returnUrl, guestFlag,total } = req.body; 
-    
         let userData, totalAmount = 0, orderInfo = "";
         let id = new mongoose.Types.ObjectId(userId);
         if (!guestFlag) {
@@ -175,9 +170,7 @@ exports.initiatePayment = async (req, res) => {
             if (!productData) {
                 return res.status(404).json({ message: `Product with ID ${productId} not found` });
             }
-
             totalAmount += productData.price * quantity;
-            
         }
         totalAmount=totalAmount+totalAmount*0.18;
         totalAmount=1 ;//totalAmount+shippingCharges;

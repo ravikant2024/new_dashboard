@@ -1,0 +1,163 @@
+
+
+.orderdetail-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.orderdetail-left,
+.orderdetail-right {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.orderdetail-left {
+  flex: 2;
+}
+
+.orderdetail-right {
+  flex: 1;
+}
+
+.orderdetail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.orderdetail-product-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* .orderdetail-product-meta,
+.orderdetail-seller {
+  font-size: 14px;
+  color: #666;
+} */
+
+.orderdetail-price {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #000;
+}
+
+.orderdetail-product-img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+.orderdetail-status-box {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.orderdetail-verified {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.orderdetail-timeline {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+.orderdetail-timeline li {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.orderdetail-status-icon {
+  color: green;
+  margin-right: 5px;
+}
+
+.orderdetail-see-updates {
+  color: #2874f0;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.orderdetail-return-info {
+  font-size: 13px;
+  color: #999;
+  margin-top: 10px;
+}
+
+.orderdetail-footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.orderdetail-chat-with-us {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.orderdetail-download-invoice {
+  width: 100%;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.orderdetail-delivery-details,
+.price-details {
+  margin-bottom: 20px;
+}
+
+.orderdetail-delivery-details h4,
+.orderdetail-price-details h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.orderdetail-delivery-details p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.orderdetail-price-details p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.orderdetail-price-details hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.orderdetail-discount {
+  color: green;
+}
+
+.orderdetail-free {
+  color: green;
+}
+
+.orderdetail-total {
+  font-weight: bold;
+}
+
+.orderdetail-paid {
+  font-size: 13px;
+  color: #555;
+}

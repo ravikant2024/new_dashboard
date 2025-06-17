@@ -13,7 +13,7 @@ const initialState = {
   orderFetchStatus: "idle",
   paymentStatus: "idle",
   orders: [],
-  currentOrder: null,
+  orderById: null,
   errors: null,
   successMessage: null,
 };
@@ -53,7 +53,7 @@ const orderSlice = createSlice({
   initialState: initialState,
   reducers: {
     resetCurrentOrder: (state) => {
-      state.currentOrder = null;
+      state.orderById = null;
     },
     resetOrderFetchStatus: (state) => {
       state.orderFetchStatus = "idle";
@@ -100,7 +100,7 @@ const orderSlice = createSlice({
       })
       .addCase(initialpaymentAsync.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        state.currentOrder = action.payload;
+        state.orderById = action.payload;
       })
       .addCase(initialpaymentAsync.rejected, (state, action) => {
         state.status = "rejected";
@@ -126,7 +126,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchOrderByIdAsync.fulfilled, (state, action) => {
         state.orderFetchStatus = "fulfilled";
-        state.currentOrder = action.payload;
+        state.orderById = action.payload;
       })
       .addCase(fetchOrderByIdAsync.rejected, (state, action) => {
         state.orderFetchStatus = "rejected";
@@ -143,7 +143,7 @@ export const selectOrderStatus = (state) => state.orderSlice.status;
 export const selectOrders = (state) => state.orderSlice.orders;
 export const selectOrdersErrors = (state) => state.orderSlice.errors;
 export const selectOrdersSuccessMessage = (state) => state.orderSlice.successMessage;
-export const selectCurrentOrder = (state) => state.orderSlice.currentOrder;
+export const selectOrderById = (state) => state.orderSlice.orderById;
 export const selectOrderFetchStatus = (state) => state.orderSlice.orderFetchStatus;
 export const selectOrderUpdateStatus = (state) => state.orderSlice.orderUpdateStatus;
 
