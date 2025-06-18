@@ -78,11 +78,20 @@ const Checkout = () => {
     }
   }, [addressDeleteStatus, dispatch]);
 
-
   useEffect(() => {
     const savedAddresses = JSON.parse(localStorage.getItem('guestAddressesData')) || [];
     setGuestUserAddress(savedAddresses);
   }, []);
+
+  useEffect(() => {
+  const isGuest = loggedInUser?._id === import.meta.env.VITE_GUESTUSER_ID;
+  const addressList = isGuest ? guestUserAddress : addressesData;
+  if (!selectedAddress && addressList.length > 0) {
+    setSelectedAddress(addressList[0]);
+  }
+}, [guestUserAddress, addressesData, loggedInUser, selectedAddress]);
+
+
   // Check for NCR region specifically
   const getShippingCharge = (address) => {
     const city = address?.city?.toLowerCase();
@@ -98,7 +107,6 @@ const Checkout = () => {
         { city: 'ghaziabad', state: 'uttar pradesh' },
         { city: 'faridabad', state: 'haryana' },
       ];
-
       const isLocalArea = localAreas.some(
         (area) => area.city === city && area.state === state
       );
@@ -129,7 +137,6 @@ const Checkout = () => {
     const shipping = parseFloat(getShippingCharge(selectedAddress));
     return subtotal + tax + shipping - discountAmount;
   };
-
 
   // Function to calculate tax for display
   const getTax = () => {
@@ -211,7 +218,6 @@ const Checkout = () => {
   }
 
   // Decrease Quantity
-
   const handleDecreaseQty = (id) => {
     if (isBuyNow) return;
     const item = cartItems.find(item => item._id === id);
@@ -293,7 +299,6 @@ const Checkout = () => {
       toast.error(err?.message || "Failed to apply coupon");
     }
   };
-
 
   // Pay and order
   const handleCreateOrder = async () => {
@@ -380,13 +385,10 @@ const Checkout = () => {
           user: loggedInUser._id,
           item: itemsToCheckout,
         }
-
         dispatch(setOrder(order));
         await CustomStorageManager.store('getOrderData', JSON.stringify(payload));
         navigate('/payment_page', { state: { payload } });
-
       }
-
     }
   }
 
