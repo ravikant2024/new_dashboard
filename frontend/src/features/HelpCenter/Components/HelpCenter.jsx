@@ -10,7 +10,6 @@ const HelpCenter = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedInUser = useSelector(selectLoggedInUser);
-  console.log('loggedInUser',loggedInUser)
   const orders = useSelector(selectOrders);
   // console.log("orders",orders)
 

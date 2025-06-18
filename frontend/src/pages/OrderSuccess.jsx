@@ -10,7 +10,6 @@ import { selectUserInfo } from '../features/user/UserSlice';
 
 let hitFlag = 0;
  const backendbaseURL=import.meta.env.VITE_API_BASE_URL
- console.log("backendbaseURL",backendbaseURL)
 const OrderSuccess = () => {
     const location = useLocation();
     const dispatch = useDispatch();

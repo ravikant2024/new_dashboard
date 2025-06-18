@@ -102,6 +102,7 @@
   border-radius: 8px;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
+  border-bottom: 1px solid black;
 }
 
 .help-order-list:hover {
@@ -112,6 +113,7 @@
 .help-order-item-link {
   text-decoration: none;
   color: inherit;
+   border-bottom: 1px solid black;
 }
 
 /* .help-order-item-link:hover .help-order-item {

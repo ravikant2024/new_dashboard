@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import "./orderDetail.css"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ const OrderDetail = () => {
     console.log("ordersDetail", ordersDetail)
 
     const product = ordersDetail?.data?.item[0]?.product;
+    console.log("product",product)
     const address = ordersDetail?.data?.address[0];
     useEffect(() => {
         dispatch(fetchOrderByIdAsync(id))
@@ -49,7 +50,7 @@ const OrderDetail = () => {
                 </div>
 
                 <div className="orderdetail-right">
-                    <button className="download-invoice">📄 Download Invoice</button>
+                    {/* <button className="download-invoice">📄 Download Invoice</button> */}
 
                     <div className="orderdetail-delivery-details">
                         <h4>Delivery details</h4>
@@ -59,14 +60,13 @@ const OrderDetail = () => {
 
                     <div className="orderdetail-price-details">
                         <h4>Price Details</h4>
-                        {/* <p>List price <span>₹{product?.price}</span></p>
-                        <p>Selling price <span>₹1,460</span></p>
-                        <p>Extra Discount <span className="orderdetail-discount">- ₹661</span></p>
-                        <p>Special Price <span>₹799</span></p>
-                        <p>Handling Fee <span className="orderdetail-free">₹70 Free</span></p>
-                        <p>Protect Promise Fee <span>₹9</span></p> */}
+                        <p>List price <span>₹{product?.price}</span></p>
+                        <p>Selling price <span>₹ 0</span></p>
+                        <p>Discount <span className="orderdetail-discount">- ₹0</span></p>
+                        <p>Delivery Charge <span>₹0</span></p>
+                        <p>Protect Promise Fee <span>₹9</span></p>
                         <hr />
-                        <p className="orderdetail-total">Total Amount <span>₹{product?.price}</span></p>
+                        <p className="orderdetail-total">Total Amount <span>₹{ordersDetail?.data.total}</span></p>
                         {/* <p className="orderdetail-paid">• Credit Card: ₹808.0</p> */}
                     </div>
                 </div>
