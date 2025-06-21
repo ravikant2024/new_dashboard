@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
         const images = req.files['images'] ? req.files['images'].map(file => file.path) : [];
 
         // Extract other form data
-        const { title, description, price, discountPercentage, category, brand, stockQuantity, sku, technicalSpecification, warranty,videoLink } = req.body;
+        const { title, description, price, discountPercentage, category, brand, stockQuantity, sku, technicalSpecification, warranty, videoLink } = req.body;
 
         // Validate required fields
         if (!title || !description || !price || !category || !brand || !stockQuantity || !sku) {
@@ -43,9 +43,24 @@ exports.create = async (req, res) => {
         });
     }
 };
+;
 
-
+// Get all products
 exports.getAll = async (req, res) => {
+    try {
+        const products = await Product.find().sort({ createdAt: -1 }); 
+        res.status(200).json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({
+            message: 'Failed to fetch products.',
+            error: error.message || error
+        });
+    }
+};
+
+
+exports.filterProduct = async (req, res) => {
     try {
         const filter = {};
         const sort = {};
@@ -54,13 +69,13 @@ exports.getAll = async (req, res) => {
 
         // Build filter object based on query parameters
         if (req.query.brand) {
-            filter.brand = { $in: req.query.brand.split(',') }; 
+            filter.brand = { $in: req.query.brand.split(',') };
         }
         if (req.query.category) {
-            filter.category = { $in: req.query.category.split(',') }; 
+            filter.category = { $in: req.query.category.split(',') };
         }
         if (req.query.user) {
-            filter['isDeleted'] = false; 
+            filter['isDeleted'] = false;
         }
 
         // Sorting logic

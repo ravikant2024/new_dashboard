@@ -17,13 +17,17 @@ import { SHIPPING, TAXES } from '../../../constants';
 import { CustomStorageManager } from '../../../classes/storageManager';
 import { checkCouponCodeIssue, getAllCoupon } from '../../../adminpanel/coupon/CouponApi';
 import { getAllCouponAsync, selectAllCoupons } from "../../../adminpanel/coupon/CouponSlice"
+import { fetchShippingchargeByAddress, selectShippingChargeByAddress } from '../../../adminpanel/deliveryCharge/deliveryChargeSlice';
+import { normalizeState, toTitleCase } from '../../../utils/GlobalFunction';
 
- const baseURL=import.meta.env.VITE_API_BASE_URL_FRONTEND
+
+const baseURL = import.meta.env.VITE_API_BASE_URL_FRONTEND
 const Checkout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const shippingchargedata = useSelector(selectShippingChargeByAddress)
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('online')
   const cartItems = useSelector(selectCartItems);
   const addressAddStatus = useSelector(selectAddressAddStatus)
@@ -42,7 +46,6 @@ const Checkout = () => {
   const isBuyNow = Boolean(product);
   const itemsToCheckout = isBuyNow ? [{ product, quantity }] : cartItems;
 
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -52,7 +55,26 @@ const Checkout = () => {
 
   useEffect(() => {
     dispatch(getAllCouponAsync());
+
   }, [dispatch]);
+
+  useEffect(() => {
+    if (
+      selectedAddress &&
+      selectedAddress.city &&
+      selectedAddress.state &&
+      selectedAddress.country
+    ) {
+      const payload = {
+        city: selectedAddress.city,
+        state: selectedAddress.state,
+        country: selectedAddress.country,
+      };
+
+      dispatch(fetchShippingchargeByAddress(payload));
+    }
+  }, [selectedAddress, dispatch]);
+
 
   // Fectch  user address 
   useEffect(() => {
@@ -84,45 +106,21 @@ const Checkout = () => {
   }, []);
 
   useEffect(() => {
-  const isGuest = loggedInUser?._id === import.meta.env.VITE_GUESTUSER_ID;
-  const addressList = isGuest ? guestUserAddress : addressesData;
-  if (!selectedAddress && addressList.length > 0) {
-    setSelectedAddress(addressList[0]);
-  }
-}, [guestUserAddress, addressesData, loggedInUser, selectedAddress]);
-
-
-  // Check for NCR region specifically
-  const getShippingCharge = (address) => {
-    const city = address?.city?.toLowerCase();
-    const state = address?.state?.toLowerCase();
-    const country = address?.country?.toLowerCase();
-
-    if (!city || !state || !country) return 0;
-    if (country === 'india') {
-      const localAreas = [
-        { city: 'delhi', state: 'delhi' },
-        { city: 'gurgaon', state: 'haryana' },
-        { city: 'noida', state: 'uttar pradesh' },
-        { city: 'ghaziabad', state: 'uttar pradesh' },
-        { city: 'faridabad', state: 'haryana' },
-      ];
-      const isLocalArea = localAreas.some(
-        (area) => area.city === city && area.state === state
-      );
-
-      return isLocalArea ? 50 : 150;
-    } else {
-      return 300;
+    const isGuest = loggedInUser?._id === import.meta.env.VITE_GUESTUSER_ID;
+    const addressList = isGuest ? guestUserAddress : addressesData;
+    if (!selectedAddress && addressList.length > 0) {
+      setSelectedAddress(addressList[0]);
     }
-  };
+  }, [guestUserAddress, addressesData, loggedInUser, selectedAddress]);
+
+
   const calculateTotal = () => {
     return itemsToCheckout.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   };
 
   // Tax calculation (18% tax rate)
   const calculateTax = (amount) => {
-    return (amount * 0.18).toFixed(2);
+    return (amount * TAXES).toFixed(2);
   };
 
   // Function to calculate total and tax based on coupon status
@@ -134,9 +132,10 @@ const Checkout = () => {
   const getTotal = () => {
     const subtotal = getSubtotal();
     const tax = parseFloat(calculateTax(subtotal));
-    const shipping = parseFloat(getShippingCharge(selectedAddress));
+    const shipping = parseFloat(shippingchargedata);
     return subtotal + tax + shipping - discountAmount;
   };
+
 
   // Function to calculate tax for display
   const getTax = () => {
@@ -166,17 +165,19 @@ const Checkout = () => {
     } else {
       setSelectedAddress(null);
     }
-  };
-
+  }
   // Function to handle form submission
   const handleaAddress = (data) => {
+   const city = toTitleCase(data.city);
+  const state = normalizeState(data.state);  
+  const country = toTitleCase(data.country);
     const addressData = {
       type: data.type,
       street: data.street,
-      country: data.country,
+      country:country,
       phoneNumber: data.phoneNumber,
-      city: data.city,
-      state: data.state,
+      city: city,
+      state:state,
       postalCode: data.postalCode,
       email: data.email,
       bussinessAddress: {
@@ -218,6 +219,7 @@ const Checkout = () => {
   }
 
   // Decrease Quantity
+
   const handleDecreaseQty = (id) => {
     if (isBuyNow) return;
     const item = cartItems.find(item => item._id === id);
@@ -302,10 +304,6 @@ const Checkout = () => {
 
   // Pay and order
   const handleCreateOrder = async () => {
-    if (!selectedAddress) {
-      alert("Please select a valid address before proceeding.");
-      return;
-    }
     const orderTotal = getTotal();
     const order = {
       user: loggedInUser._id,
@@ -379,7 +377,6 @@ const Checkout = () => {
           userId: order.user,
           guestFlag: order.guestFlag,
           paymentMode: selectedPaymentMethod,
-          // total: orderTotal + SHIPPING + TAXES,
           total: orderTotal,
           email: loggedInUser.email,
           user: loggedInUser._id,
@@ -460,6 +457,44 @@ const Checkout = () => {
 
             <div className="name-fields">
               <div className="form-group">
+                <label htmlFor="city">City *</label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder='Enter city'
+                  {...register("city", {
+                    required: "City is required", pattern: {
+                      value: /^[a-zA-Z\s]*$/,
+                      message: "Only letters are allowed",
+                    },
+                  })}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                  }}
+                />
+                {errors.city && <p className="error">{errors.city.message}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="state">State *</label>
+                <input
+                  type="text"
+                  id="state"
+                  placeholder='Enter state'
+                  {...register("state", {
+                    required: "State is required", pattern: {
+                      value: /^[a-zA-Z\s]*$/,
+                      message: "Only letters are allowed",
+                    },
+                  })}
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                  }}
+                />
+                {errors.state && <p className="error">{errors.state.message}</p>}
+              </div>
+            </div>
+            <div className="name-fields">
+              <div className="form-group">
                 <label htmlFor="country">Country *</label>
                 <input
                   type="text"
@@ -507,46 +542,6 @@ const Checkout = () => {
 
                 {errors.phoneNumber && <p className="error">{errors.phoneNumber.message}</p>}
               </div>
-            </div>
-
-            <div className="name-fields">
-              <div className="form-group">
-                <label htmlFor="city">City *</label>
-                <input
-                  type="text"
-                  id="city"
-                  placeholder='Enter city'
-                  {...register("city", {
-                    required: "City is required", pattern: {
-                      value: /^[a-zA-Z\s]*$/,
-                      message: "Only letters are allowed",
-                    },
-                  })}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                  }}
-                />
-                {errors.city && <p className="error">{errors.city.message}</p>}
-              </div>
-              <div className="form-group">
-                <label htmlFor="state">State *</label>
-                <input
-                  type="text"
-                  id="state"
-                  placeholder='Enter state'
-                  {...register("state", {
-                    required: "State is required", pattern: {
-                      value: /^[a-zA-Z\s]*$/,
-                      message: "Only letters are allowed",
-                    },
-                  })}
-                  onInput={(e) => {
-                    e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                  }}
-                />
-                {errors.state && <p className="error">{errors.state.message}</p>}
-              </div>
-
             </div>
 
             <div className="name-fields">
@@ -713,10 +708,7 @@ const Checkout = () => {
             ))
           )}
         </div>
-
-
         {/* Order summary */}
-
         <div className='main-order-container'>
           <h2 className='order-heading'>Order Summary</h2>
           {
@@ -797,7 +789,7 @@ const Checkout = () => {
                     <div className="summary-row">
                       <p>Shipping:</p>
                       {/* <p>₹150</p> */}
-                      <p>₹{getShippingCharge(selectedAddress)}</p>
+                      <p>₹{shippingchargedata}</p>
                     </div>
                     <div className="summary-row">
                       <p>Taxes (18%):</p>

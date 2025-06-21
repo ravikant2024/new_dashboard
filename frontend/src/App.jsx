@@ -63,6 +63,8 @@ import BulkEnquiryFormpage from './pages/BulkEnquiryFormpage';
 import BulkEnquiryListPage from './adminpanel/pages/BulkEnquiryListPage';
 import HelpCenterPage from './pages/HelpCenterPage';
 import OrderDetailpage from './pages/OrderDetailpage';
+import DeliveryChargePage from './adminpanel/pages/DeliveryChargePage';
+import DeliveryChargeListPage from './adminpanel/pages/DeliveryChargeListPage';
 function App() {
   const loggedInUser = useSelector(selectLoggedInUser);
   useAuthCheck();
@@ -97,7 +99,7 @@ function App() {
           <Route path='search-product-list' element={<SearchProductListPage />} />
           <Route path='bulk-enquiry/enquiry' element={<BulkEnquiryFormpage />} />
           <Route path='helpcenter' element={<HelpCenterPage />} />
-          <Route path='/order_details/:id' element={<OrderDetailpage />} />
+          <Route path='/order_details' element={<OrderDetailpage />} />
 
           {/* Protected Routes */}
           <Route path="cart" element={<Protected><CartPage /></Protected>} />
@@ -134,6 +136,8 @@ function App() {
           <Route path="blog-list" element={<BlogList />} />
           <Route path="contactus-user-list" element={<ContactUserPage />} />
           <Route path="bulk-enquiry-list" element={<BulkEnquiryListPage />} />
+          <Route path="add-shipping-charge" element={<DeliveryChargePage />} />
+          <Route path="shippingcharge-list" element={<DeliveryChargeListPage />} />
         </Route>
         {/* Payment Page */}
         <Route path="/payment_page" element={<PaymentPage />} />

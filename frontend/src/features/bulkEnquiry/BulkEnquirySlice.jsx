@@ -43,7 +43,7 @@ const BulkEnquirySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createBulkEnquiryAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'lodaing';
         state.error = null;
       })
       .addCase(createBulkEnquiryAsync.fulfilled, (state, action) => {

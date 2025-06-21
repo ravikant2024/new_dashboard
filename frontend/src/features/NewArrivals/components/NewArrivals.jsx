@@ -6,7 +6,7 @@ import "./newArrival.css";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "../../auth/AuthSlice";
-import { fetchProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProducts, selectProductTotalResults } from "../../products/ProductsSlice";
+import { fetchFilterProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProducts, selectProductTotalResults } from "../../products/ProductsSlice";
 import { resetCartItemAddStatus, selectCartItemAddStatus } from "../../cart/CartSlice";
 import { resetWishlistItemAddStatus, resetWishlistItemDeleteStatus, selectWishlistItemAddStatus, selectWishlistItemDeleteStatus, selectWishlistItems } from "../../wishlist/WishlistSlice";
 import usePagination from "@mui/material/usePagination";
@@ -86,7 +86,7 @@ const NewArrivals = () => {
     // Fetch products on filter or page change
     useEffect(() => {
         const finalFilters = { ...filters, pagination: { page, limit: ITEMS_PER_PAGE } };
-        dispatch(fetchProductsAsync(finalFilters));
+        dispatch(fetchFilterProductsAsync(finalFilters));
     }, [filters, page, dispatch, loggedInUser]);
 
     // Handle wishlist add/remove

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './searchProductsList.css';
-import { fetchProductsAsync, selectProducts } from '../../products/ProductsSlice';
+import { fetchFilterProductsAsync, selectProducts } from '../../products/ProductsSlice';
 import SearchProductCardList from './SearchProductCardList';
 
 const SearchProductsList = () => {
@@ -15,7 +15,7 @@ const SearchProductsList = () => {
     const query = searchParams.get('q') || '';
     useEffect(() => {
         if (products.length === 0) {
-            dispatch(fetchProductsAsync({}));
+            dispatch(fetchFilterProductsAsync({}));
         }
     }, [dispatch, products.length]);
 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { selectLoggedInUser } from '../../auth/AuthSlice'
 import { ITEMS_PER_PAGE } from '../../../constants'
-import { fetchProductsAsync, selectProducts } from '../../products/ProductsSlice'
+import { fetchFilterProductsAsync, selectProducts } from '../../products/ProductsSlice'
 const CategorySidebarList = () => {
     const dispatch = useDispatch()
     const { name } = useParams()
@@ -17,7 +17,7 @@ const CategorySidebarList = () => {
 
     useEffect(() => {
         const finalFilters = { ...filters, pagination: { page, limit: ITEMS_PER_PAGE } };
-        dispatch(fetchProductsAsync(finalFilters));
+        dispatch(fetchFilterProductsAsync(finalFilters));
     }, [filters, page, dispatch, loggedInUser]);
 
     const filteredCatData = products.filter(

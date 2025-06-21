@@ -9,7 +9,16 @@ export const addProduct=async(data)=>{
         throw error.response.data
     }
 }
-export const fetchProductsAll = async (filters) => {
+
+export const fetchAllProducts=async(data)=>{
+    try {
+        const res=await axiosInstance.get('/products',data);
+        return res.data
+    } catch (error) {
+        throw error.response.data
+    }
+}
+export const fetchFilterProducts = async (filters) => {
 
     let queryString = '';
      if (filters.searchTerm) {
@@ -34,7 +43,6 @@ export const fetchProductsAll = async (filters) => {
     if (filters.user) {
         queryString += `user=${filters.user}&`;
     }
-
     try {
         const res = await axiosInstance.get(`/products?${queryString}`);
         const totalResults = res.headers['x-total-count'];

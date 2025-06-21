@@ -1,77 +1,114 @@
-import { data, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./orderDetail.css"
-import { useEffect, useState } from "react";
+import { fetchOrderByIdAsync, selectOrderById, selectOrders } from "../OrderSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderByIdAsync, selectOrderById } from "../OrderSlice";
-import { selectProducts } from "../../products/ProductsSlice";
+import { HiOutlineChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaUser } from "react-icons/fa6";
 
 const OrderDetail = () => {
-    const { id } = useParams();
     const dispatch = useDispatch()
-    const ordersDetail = useSelector(selectOrderById);
-    console.log("ordersDetail", ordersDetail)
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const orderId = queryParams.get("order_id");
+    const itemId = queryParams.get("item_id");
+    const orders = useSelector(selectOrderById);
+    const order = orders?.data?._id === orderId ? orders.data : null;
+    
+    const item = order?.item.find(i => i._id === itemId);
 
-    const product = ordersDetail?.data?.item[0]?.product;
-    console.log("product",product)
-    const address = ordersDetail?.data?.address[0];
+    const addressData = order?.address;
+    const product = item?.product;
+
+
+
     useEffect(() => {
-        dispatch(fetchOrderByIdAsync(id))
-    }, [id]);
-    // useEffect(() => {
-    //     dispatch(fetchProductById(id))
-    // }, [id])
+        if (orderId) {
+            dispatch(fetchOrderByIdAsync(orderId));
+        }
+    }, [dispatch, orderId]);
     return (
         <>
-            <div className="orderdetail-container">
-                <div className="orderdetail-left">
-                    <div className="orderdetail-header">
-                        <div className="orderdetail-info">
-                            <h3 className="orderdetail-product-title">
-                                {product?.title}
-                            </h3>
-                            <h4 className="orderdetail-price">₹{product?.price}</h4>
+            <div className="main-orderdetails">
+                <div className="order-receipt-wrapper">
+                    {/* <!-- Left Section --> */}
+                    <div className="order-receipt-left">
+                        <div className="order-receipt-header">
+                            <div className="order-receipt-info">
+                                <h3 className="order-receipt-title">
+                                    {product?.title}
+                                </h3>
+                                <p className="order-receipt-color">Model: {product?.sku || "N/A"}</p>
+                                {/* <p className="order-receipt-seller">Seller: BUZZINDIA</p> */}
+                                      <h4 className="order-receipt-price">₹{Math.round(order?.total).toLocaleString("en-IN")}</h4>
+                            </div>
+                            <img
+                                src={product?.thumbnail }
+                                alt="Product"
+                                className="order-receipt-product-image"
+                            />
                         </div>
-                        <img src={product?.thumbnail} alt="Product" className="orderdetail-product-img" />
-                    </div>
-
-                    {/* <div className="orderdetail-status-box">
-                        <p className="verified">📦 Item was opened and verified at the time of delivery.</p>
-                        <ul className="orderdetail-timeline">
-                            <li><span className="orderdetail-status-icon">&#x2705;</span> Order Confirmed, May 31</li>
-                            <li><span className="orderdetail-status-icon">&#x2705;</span> Delivered, Jun 01</li>
-                        </ul>
-                        <a href="#" className="orderdetail-see-updates">See All Updates →</a>
-                        <p className="orderdetail-return-info">Return policy ended on Jun 08</p>
-                    </div> */}
-
-                    <div className="orderdetail-footer">
-                        <span className="orderdetail-chat-with-us">💬 Chat with us</span>
-                    </div>
-                </div>
-
-                <div className="orderdetail-right">
-                    {/* <button className="download-invoice">📄 Download Invoice</button> */}
-
-                    <div className="orderdetail-delivery-details">
-                        <h4>Delivery details</h4>
-                        <p>🏠 {address?.street}, {address?.city}, {address?.state} - {address?.postalCode}</p>
-                        <p>👤 {address?.type}, {address?.phoneNumber}</p>
-                    </div>
-
-                    <div className="orderdetail-price-details">
-                        <h4>Price Details</h4>
-                        <p>List price <span>₹{product?.price}</span></p>
-                        <p>Selling price <span>₹ 0</span></p>
-                        <p>Discount <span className="orderdetail-discount">- ₹0</span></p>
-                        <p>Delivery Charge <span>₹0</span></p>
-                        <p>Protect Promise Fee <span>₹9</span></p>
                         <hr />
-                        <p className="orderdetail-total">Total Amount <span>₹{ordersDetail?.data.total}</span></p>
-                        {/* <p className="orderdetail-paid">• Credit Card: ₹808.0</p> */}
+                        <div className="order-receipt-status-box">
+                            <div className="order-receipt-timeline">
+                                <p>
+                                    {/* {order?.status},{" "}
+                                    {new Date(order?.createdAt).toLocaleDateString(undefined, {
+                                        day: "numeric", month: "long", year: "numeric"
+                                    })} */}
+                                </p>
+
+                                <p> Delivered, Jun 01</p>
+                                <p> Delivered, Jun 01</p>
+
+                                <p> Delivered, Jun 01</p>
+                                <p> Delivered, Jun 01</p>
+                            </div>
+                            {/* <a href="#">See All Updates →</a> */}
+                            {/* <p className="order-receipt-return">Return policy ended on Jun 08</p> */}
+                        </div>
+                        <hr />
+                        <div className="order-receipt-rating">
+                            <span className="order-receipt-star green">☆</span>
+                            <span className="order-receipt-star">☆</span>
+                            <span className="order-receipt-star">☆</span>
+                            <span className="order-receipt-star">☆</span>
+                            <span className="order-receipt-star">☆</span>
+                            <div className="order-receipt-review-btn">Add Review</div>
+                        </div>
+                        <hr />
+                        <div className="order-receipt-chat"><HiOutlineChatBubbleOvalLeftEllipsis className="order-chat-icon" /> <span className="">Chat with us</span></div>
+                    </div>
+                    {/* <!-- Right Section --> */}
+                    <div className="order-receipt-right">
+                        {/* <div className="order-receipt-invoice-btn">📄 Download Invoice</div> */}
+
+                        <div className="order-receipt-delivery">
+                            <h4>Delivery details</h4>
+                            {addressData?.map((data, index) => (
+                                <div key={index} className="orderdetails-address">
+                                    <p><AiOutlineHome /> {data.street}, {data.city}, {data.state} – {data.postalCode}, {data.country}</p>
+                                    <hr />
+                                    <p><FaUser /> {data.type}, {data.phoneNumber}</p>
+                                </div>
+                            ))}
+                        </div>
+                        {/* Product Details */}
+                        <div className="order-receipt-price-details">
+                            <h4>Price Details</h4>
+                            <p>List price <span className="strike">₹{product?.price}</span></p>
+                            <p>Selling price <span>₹{product?.price}</span></p>
+                            <p>Discount <span>- ₹0</span></p>
+                            <p>Delivery Charge <span className="free">Free</span></p>
+                          
+                            <hr />
+                            <p className="order-receipt-total">Total Amount <span>₹{Math.round(order?.total).toLocaleString("en-IN")}</span></p>
+                            <p className="order-receipt-credit">• {order?.paymentMode.charAt(0).toUpperCase() + order?.paymentMode.slice(1)}: ₹{Math.round(order?.total).toLocaleString("en-IN")}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

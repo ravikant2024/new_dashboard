@@ -22,13 +22,15 @@ import PendingIcon from '@mui/icons-material/Pending';
 import { getAllCouponAsync, selectAllCoupons } from '../coupon/CouponSlice';
 import { getAllUsersAsync, selectUsersList } from '../../features/user/UserSlice';
 import { selectCategory } from '../category/CategorySlice';
+import { fetchProductAllAsync, selectProducts, selectProductTotalResults } from '../../features/products/ProductsSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch()
   const orderData = useSelector(selectOrders);
   const couponData = useSelector(selectAllCoupons);
   const usersList = useSelector(selectUsersList);
-    const category = useSelector(selectCategory);
+  const category = useSelector(selectCategory);
+  const totalProducts = useSelector(selectProductTotalResults);
   const pendingData = orderData.filter(order => order.status === 'Pending').length
   const dispatched = orderData.filter(order => order.status === 'Dispatched').length
   const outfordelivery = orderData.filter(order => order.status === 'Out for delivery').length
@@ -42,8 +44,9 @@ const Dashboard = () => {
     dispatch(getAllOrdersAsync())
     dispatch(getAllCouponAsync())
     dispatch(getAllUsersAsync())
+    dispatch(fetchProductAllAsync())
   }, [dispatch])
-  
+
   return (
     <>
       <Box sx={{ p: 1, color: 'white', fontFamily: 'sans-serif', marginLeft: '0px' }}>
@@ -160,7 +163,7 @@ const Dashboard = () => {
               <ArrowUpwardIcon sx={{ color: '#008000', mt: 1 }} />
             </Paper>
           </Box>
-              {/* Card 10 */}
+          {/* Card 10 */}
           <Box sx={{ flexBasis: '190px' }}>
             <Paper sx={{ p: 2, bgcolor: '#1E1E1E', textAlign: 'center' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
@@ -172,14 +175,26 @@ const Dashboard = () => {
               <ArrowUpwardIcon sx={{ color: '#008000', mt: 1 }} />
             </Paper>
           </Box>
-              {/* Card 11 */}
-              <Box sx={{ flexBasis: '190px' }}>
+          {/* Card 11 */}
+          <Box sx={{ flexBasis: '190px' }}>
             <Paper sx={{ p: 2, bgcolor: '#1E1E1E', textAlign: 'center' }}>
               <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
                 <span style={{ color: '#008000' }}>{category?.length}</span>
               </Typography>
               <Typography variant="body2" sx={{ color: 'grey' }}>
                 Total Category
+              </Typography>
+              <ArrowUpwardIcon sx={{ color: '#008000', mt: 1 }} />
+            </Paper>
+          </Box>
+          {/* Card 12 */}
+          <Box sx={{ flexBasis: '190px' }}>
+            <Paper sx={{ p: 2, bgcolor: '#1E1E1E', textAlign: 'center' }}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
+                <span style={{ color: '#008000' }}>{totalProducts}</span>
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'grey' }}>
+                Total Product
               </Typography>
               <ArrowUpwardIcon sx={{ color: '#008000', mt: 1 }} />
             </Paper>

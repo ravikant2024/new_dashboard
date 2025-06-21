@@ -30,6 +30,7 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { useNavigate } from 'react-router-dom';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
+import AirportShuttleIcon from '@mui/icons-material/AirportShuttle';
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   color: 'white',
@@ -97,6 +98,10 @@ const AdminSidebar = () => {
       navigate("contactus-user-list")
     }else if(item==="Bulk Enquiry"){
       navigate("bulk-enquiry-list")
+    }else if(item==="Add Charge"){
+      navigate("add-shipping-charge")
+    } else if(item==="ChargeList"){
+      navigate("shippingcharge-list")
     }
   };
 
@@ -112,8 +117,8 @@ const AdminSidebar = () => {
     { text: 'Products', icon: <ViewModuleIcon />, items: ['Add Brand', 'Add Category', 'Add Products','Product List','Category List'] },
     { text: 'Orders', icon: <ListAltIcon />, items: ['Order Details', ] },
     { text: 'Coupons', icon: <TableChartIcon />, items: ['Add Coupon', 'Coupon List'] },
-    { text: 'Charts', icon: <BarChartIcon />, items: ['Line Chart', 'Bar Chart', 'Pie Chart'] },
-    { text: 'Icons', icon: <ImageIcon />, items: ['Material Icons', 'Font Awesome Icons'] },
+    // { text: 'Charts', icon: <BarChartIcon />, items: ['Line Chart', 'Bar Chart', 'Pie Chart'] },
+    { text: 'Delivery Charge', icon: <AirportShuttleIcon />, items: ['Add Charge','ChargeList'] },
     { text: 'Users', icon: <PeopleIcon />, items: ['Users List'] },
     { text: 'Blog', icon: <PostAddIcon />, items: ['Add Blog','Blog List'] },
     { text: 'Contact-us', icon: <ContactMailIcon />,items: ['Contact-Us','Bulk Enquiry'] },

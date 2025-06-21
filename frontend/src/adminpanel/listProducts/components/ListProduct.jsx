@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography, IconButton, Divider, Button, Menu, MenuItem, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CloseIcon from '@mui/icons-material/Close';
-import { deleteProductByIdAsync, fetchProductsAsync, selectProducts, selectProductTotalResults } from '../../../features/products/ProductsSlice';
+import { deleteProductByIdAsync, fetchFilterProductsAsync, selectProducts, selectProductTotalResults } from '../../../features/products/ProductsSlice';
 import EditProduct from './EditProduct';
 import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
@@ -59,7 +59,7 @@ const ListProduct = () => {
   // Fetch products on filter or page change
   useEffect(() => {
     const finalFilters = { ...filters, pagination: { page, limit: ITEMS_PER_PAGE_ADMIN } };
-    dispatch(fetchProductsAsync(finalFilters));
+    dispatch(fetchFilterProductsAsync(finalFilters));
   }, [filters, page, dispatch]);
 
   const handleMenuClick = (event, product) => {

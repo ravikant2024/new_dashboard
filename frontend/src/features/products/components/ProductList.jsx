@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
-import { fetchProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProducts, selectProductTotalResults } from '../ProductsSlice';
+import { fetchFilterProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProducts, selectProductTotalResults } from '../ProductsSlice';
 import { resetCartItemAddStatus, selectCartItemAddStatus } from '../../cart/CartSlice';
 import { createWishlistItemAsync, deleteWishlistItemByIdAsync, resetWishlistItemAddStatus, resetWishlistItemDeleteStatus, selectWishlistItemAddStatus, selectWishlistItemDeleteStatus, selectWishlistItems } from '../../wishlist/WishlistSlice';
 import ProductCard from './ProductCard';
@@ -76,7 +76,7 @@ const ProductList = () => {
     // Fetch products on filter or page change
     useEffect(() => {
         const finalFilters = { ...filters, pagination: { page, limit: ITEMS_PER_PAGE } };
-        dispatch(fetchProductsAsync(finalFilters));
+        dispatch(fetchFilterProductsAsync(finalFilters));
     }, [filters, page, dispatch, loggedInUser]);
 
     // Handle wishlist add/remove

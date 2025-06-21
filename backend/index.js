@@ -37,6 +37,7 @@ const blogRoutes = require('./routes/Blog');
 const commentRoutes = require('./routes/Comment');
 const contactRoutes= require('./routes/ContactUs');
 const bulkEnquiryRoutes = require('./routes/BulkEnquiry');
+const shippingChargeRoutes = require('./routes/ShippingCharge');
 (async () => {
     const server = express();
     connectToDB()
@@ -119,6 +120,7 @@ const bulkEnquiryRoutes = require('./routes/BulkEnquiry');
     server.use("/comments",commentRoutes)
     server.use("/contactus",contactRoutes)
     server.use("/bulk-enquiry", bulkEnquiryRoutes);
+    server.use("/shipping-charge",shippingChargeRoutes)
     server.get("/", async (req, res) => {
 
         res.status(200).json({ message: 'Running' });

@@ -11,7 +11,6 @@ const HelpCenter = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector(selectLoggedInUser);
   const orders = useSelector(selectOrders);
-  // console.log("orders",orders)
 
   useEffect(() => {
     if (loggedInUser?._id) {
@@ -19,20 +18,58 @@ const HelpCenter = () => {
     }
   }, [dispatch, loggedInUser]);
 
+  const showMoreOrder = () => {
+    navigate('/orders');
+  };
+
   return (
     <div className="help-center-container">
       <h1 className="help-center-title">Original Innovation LLP Help Center</h1>
       <p className="help-center-description">
         Original Innovation LLP Help Centre offers quick assistance for issues related to orders,
-        deliveries, returns, payments, and more. With user-friendly filters and dedicated support,
-        customers can easily resolve queries and enjoy a smooth online shopping experience.
-        Professional help is available via the support number or page for fast and efficient service.
+        deliveries, returns, payments, and more.
       </p>
 
       <div className="help-content-area">
-        <div className="help-main-content">
-          <span className="breadcrumb">Help Centre</span>
-          {!loggedInUser.isAdmin===false ? (
+        <div>
+          <div className='help-breadcrumb'>
+            <span> Help Centre</span>
+          </div>
+          {!loggedInUser?.isAdmin ? (
+            orders.length > 0 ? (
+              <div className="help-order-list-section">
+                <h3>Which item are you facing an issue with?</h3>
+                <div className="help-order-list">
+                  {orders.flatMap(order =>
+                    order.item.map(i => (
+                      <Link
+                        key={i._id}
+                        to={`/order_details?order_id=${order._id}&item_id=${i._id}&unit_id=${i.product._id}`}
+                        className="help-order-item-link"
+                      >
+                        <div className="help-order-item">
+                          <img
+                            src={i.product.thumbnail || 'https://via.placeholder.com/100'}
+                            alt="Product Thumbnail"
+                            className="help-order-img"
+                          />
+                          <div className="help-order-details">
+                            <h4>{i.product.title}</h4>
+                          </div>
+                        </div>
+                      </Link>
+                    ))
+                  )}
+                </div>
+
+                <p className='view-more' onClick={showMoreOrder}>View More</p>
+              </div>
+            ) : (
+              <p style={{ textAlign: "center", marginTop: "20px", color: "black", fontSize: '20px' }}>
+                Order is not available.
+              </p>
+            )
+          ) : (
             <div className="login-prompt">
               <img src={helpcenImage} alt="Login Illustration" className="login-illustration" />
               <p>Login to get help with your recent orders and issues</p>
@@ -40,34 +77,6 @@ const HelpCenter = () => {
                 Log In
               </button>
             </div>
-          ) : (
-            <div className="help-order-list-section">
-              <h3>Which item are you facing an issue with?</h3>
-              <div className="help-order-list">
-                {orders.map((order) =>
-                  order.item.map((orderItem) => (
-                    <Link
-                      key={orderItem._id}
-                      to={`/order_details/${order._id}`}
-                      className="help-order-item-link"
-                    >
-                      <div className="help-order-item">
-                        <img
-                          src={orderItem.product.thumbnail}
-                          alt="image"
-                          className="help-order-img"
-                        />
-                        <div className="help-order-details">
-                          <h4>{orderItem.product.title}</h4>
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                )}
-              </div>
-            </div>
-
-            
           )}
         </div>
       </div>

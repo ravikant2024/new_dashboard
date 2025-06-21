@@ -3,8 +3,9 @@ import {
     addProduct,
     deleteProductById,
     fetchProductById,
-    fetchProductsAll,
+    fetchFilterProducts,
     updateProductById,
+    fetchAllProducts,
 } from "./ProductsApi";
 
 // Initial state
@@ -31,11 +32,19 @@ export const addProductAsync = createAsyncThunk(
     }
 );
 
-export const fetchProductsAsync = createAsyncThunk(
-    "products/fetchProductsAsync",
-    async (filters) => {
-        const products = await fetchProductsAll(filters);
+export const fetchProductAllAsync = createAsyncThunk(
+    "products/fetchProductAllAsync",
+    async () => {
+        const products = await fetchAllProducts();
         return products;
+    }
+);
+
+export const fetchFilterProductsAsync = createAsyncThunk(
+    "products/fetchFilterProductsAsync",
+    async (filters) => {
+        const filterproducts = await fetchFilterProducts(filters);
+        return filterproducts;
     }
 );
 
@@ -104,15 +113,29 @@ const productSlice = createSlice({
             })
 
             // Fetch all products
-            .addCase(fetchProductsAsync.pending, (state) => {
+            .addCase(fetchProductAllAsync.pending, (state) => {
+                state.status = "pending";
+            })
+            .addCase(fetchProductAllAsync.fulfilled, (state, action) => {
+                state.status = "fulfilled";
+                state.products = action.payload.data || action.payload;
+                state.totalResults = action.payload.totalResults || action.payload.length || 0;
+            })
+            .addCase(fetchProductAllAsync.rejected, (state, action) => {
+                state.status = "rejected";
+                state.errors = action.error.message;
+            })
+
+            // Fetch filtered products
+            .addCase(fetchFilterProductsAsync.pending, (state) => {
                 state.productFetchStatus = "pending";
             })
-            .addCase(fetchProductsAsync.fulfilled, (state, action) => {
+            .addCase(fetchFilterProductsAsync.fulfilled, (state, action) => {
                 state.productFetchStatus = "fulfilled";
                 state.products = action.payload.data;
                 state.totalResults = action.payload.totalResults;
             })
-            .addCase(fetchProductsAsync.rejected, (state, action) => {
+            .addCase(fetchFilterProductsAsync.rejected, (state, action) => {
                 state.productFetchStatus = "rejected";
                 state.errors = action.error.message;
             })
@@ -179,6 +202,7 @@ export const selectProductAddStatus = (state) => state.productSlice.productAddSt
 export const selectProductSuccessMessage = (state) => state.productSlice.successMessage;
 export const selectProductUpdateStatus = (state) => state.productSlice.productUpdateStatus;
 export const selectProductDeleteStatus = (state) => state.productSlice.productDeleteStatus;
+export const selectFetchAllStatus = (state) => state.productSlice.status;
 
 // Export actions
 export const {
@@ -187,7 +211,7 @@ export const {
     resetProductDetails,
     clearSelectedProduct,
     resetProductAddStatus,
-    resetProductUpdateStatus, 
+    resetProductUpdateStatus,
 } = productSlice.actions;
 
 // Export reducer

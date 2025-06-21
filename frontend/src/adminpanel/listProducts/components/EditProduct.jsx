@@ -18,7 +18,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { selectBrands, fetchBrandsAsync } from '../../addbrand/AddBrandSlice';
 import { selectCategory, fetchCategoryAsync } from '../../category/CategorySlice';
 import { toast } from 'react-toastify';
-import { fetchProductByIdAsync, fetchProductsAsync, resetProductUpdateStatus, selectProductUpdateStatus, selectSelectedProduct, updateProductByIdAsync } from '../../../features/products/ProductsSlice';
+import { fetchProductByIdAsync, fetchFilterProductsAsync, resetProductUpdateStatus, selectProductUpdateStatus, selectSelectedProduct, updateProductByIdAsync } from '../../../features/products/ProductsSlice';
 
 const EditProduct = ({ productId, setOpenDialog ,currentFilters}) => {
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const EditProduct = ({ productId, setOpenDialog ,currentFilters}) => {
         if (updateProductStatus === 'fulfilled') {
             toast.success('Product updated successfully!');
             setOpenDialog(false); 
-            dispatch(fetchProductsAsync(currentFilters)); 
+            dispatch(fetchFilterProductsAsync(currentFilters)); 
         } else if (updateProductStatus === 'rejected') {
             toast.error('Failed to update product!');
         }
