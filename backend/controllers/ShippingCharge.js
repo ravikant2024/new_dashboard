@@ -1,4 +1,5 @@
 const ShippingCharge = require('../models/ShippingCharge');
+const { toTitleCase, normalizeState } = require('../utils/StringConvertion');
 
 const delhiNCRCities = ['Delhi', 'Noida', 'Gurgaon', 'Faridabad', 'Ghaziabad'];
 const otherIndianStates = [
@@ -84,57 +85,43 @@ const create = async (req, res) => {
   }
 };
 
-
 // Core logic to get shipping charge by city/state/country with improved fallback
 const getShippingChargeByAddressLogic = async ({ city, state, country }) => {
   try {
-    const normalizedCity = city.trim().toLowerCase();
-    const normalizedState = state.trim().toLowerCase();
-    const normalizedCountry = country.trim().toLowerCase();
+    const normalizedCity = toTitleCase(city.trim());
+    const normalizedState = normalizeState(state);
+    const normalizedCountry = toTitleCase(country.trim());
+    const countryLower = normalizedCountry.toLowerCase();
 
-    // 1. Exact match: city + state + country
-    let charge = await ShippingCharge.findOne({
-      city: { $regex: `^${normalizedCity}$`, $options: 'i' },
-      state: { $regex: `^${normalizedState}$`, $options: 'i' },
-      country: { $regex: `^${normalizedCountry}$`, $options: 'i' }
-    });
-    if (charge) return charge.shipping_charge;
+    // Helper to find shipping charge by query
+    const findCharge = async (query) => await ShippingCharge.findOne(query);
 
-    // 2. City match only (state is 'n/a')
-    charge = await ShippingCharge.findOne({
-      city: { $ne: 'n/a', $regex: `^${normalizedCity}$`, $options: 'i' },
-      state: 'n/a',
-      country: { $regex: `^${normalizedCountry}$`, $options: 'i' }
-    });
-    if (charge) return charge.shipping_charge;
+    // Queries in order of priority
+    const queries = [
+      { city: new RegExp(`^${normalizedCity}$`, 'i'), state: new RegExp(`^${normalizedState}$`, 'i'), country: new RegExp(`^${normalizedCountry}$`, 'i') },
+      { city: { $ne: 'n/a', $regex: new RegExp(`^${normalizedCity}$`, 'i') }, state: 'n/a', country: new RegExp(`^${normalizedCountry}$`, 'i') },
+      { city: 'n/a', state: new RegExp(`^${normalizedState}$`, 'i'), country: new RegExp(`^${normalizedCountry}$`, 'i') }
+    ];
 
-    // 3. State match only (city is 'n/a')
-    charge = await ShippingCharge.findOne({
-      city: 'n/a',
-      state: { $regex: `^${normalizedState}$`, $options: 'i' },
-      country: { $regex: `^${normalizedCountry}$`, $options: 'i' }
-    });
-    if (charge) return charge.shipping_charge;
-
-    // 4. Fallback generic charge only for non-India countries
-    if (normalizedCountry !== 'india') {
-      charge = await ShippingCharge.findOne({
-        city: 'n/a',
-        state: 'n/a',
-        country: 'others'
-      });
+    for (const query of queries) {
+      const charge = await findCharge(query);
       if (charge) return charge.shipping_charge;
     }
 
-    // No match found, return 0
-    return 0;
+    if (countryLower !== 'india') {
+      const charge = await findCharge({ city: 'n/a', state: 'n/a', country: 'others' });
+      if (charge) return charge.shipping_charge;
+    }
 
+    return {
+      error: true,
+      message: 'Shipping charge details not found. Please provide a correct city, state, and country.'
+    };
   } catch (err) {
     console.error('Error fetching shipping charge:', err);
     throw err;
   }
 };
-
 
 // API to fetch shipping charge based on user input
 const fetchShippingCharge = async (req, res) => {
@@ -152,7 +139,6 @@ const fetchShippingCharge = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
-
 
 // List all shipping charge entries sorted by country, state, city
 const listShippingCharge = async (req, res) => {

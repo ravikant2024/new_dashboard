@@ -1,4 +1,4 @@
-export const toTitleCase = (str) => {
+const toTitleCase = (str) => {
   return str
     ?.toLowerCase()
     .split(' ')
@@ -50,27 +50,31 @@ const stateAbbreviations = {
   'H P': 'Himachal Pradesh'
 };
 
- export const normalizeState = (input) => {
+const normalizeState = (input) => {
   if (!input) return '';
 
-  const cleaned = input.trim().replace(/\./g, '').replace(/\s+/g, '').toLowerCase();
-  const variants = [
-    input.trim(),
-    input.trim().toLowerCase(),
-    input.trim().toUpperCase(),
-    cleaned,
-    input.trim().replace(/\./g, '').toLowerCase(),
-    input.trim().replace(/\./g, '').toUpperCase(),
-    input.trim().replace(/\s+/g, ' ')
-  ];
+  // Normalize spaces: replace multiple spaces with one space, trim, lowercase
+  const normalizedSpace = input.trim().replace(/\s+/g, ' ').toLowerCase();
+  
+  // Also clean dots
+  const normalizedNoDots = normalizedSpace.replace(/\./g, '');
+
+  // Also variant with no spaces at all (just in case)
+  const normalizedNoSpaces = normalizedSpace.replace(/\s/g, '');
+
+  const variants = [normalizedSpace,normalizedNoDots,normalizedNoSpaces,normalizedSpace.toUpperCase(),
+    normalizedNoDots.toUpperCase() ];
 
   for (let variant of variants) {
     if (stateAbbreviations[variant]) {
       return stateAbbreviations[variant];
     }
   }
-
-  // fallback to title case
   return toTitleCase(input);
 };
 
+
+module.exports = {
+  toTitleCase,
+  normalizeState
+};

@@ -20,7 +20,7 @@ const reviewSchema=new Schema({
     },
     comment:{
         type:String,
-        required:true
+       default:''
     },
     createdAt:{
         type:Date,

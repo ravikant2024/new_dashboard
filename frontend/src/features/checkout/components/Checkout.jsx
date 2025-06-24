@@ -18,8 +18,6 @@ import { CustomStorageManager } from '../../../classes/storageManager';
 import { checkCouponCodeIssue, getAllCoupon } from '../../../adminpanel/coupon/CouponApi';
 import { getAllCouponAsync, selectAllCoupons } from "../../../adminpanel/coupon/CouponSlice"
 import { fetchShippingchargeByAddress, selectShippingChargeByAddress } from '../../../adminpanel/deliveryCharge/deliveryChargeSlice';
-import { normalizeState, toTitleCase } from '../../../utils/GlobalFunction';
-
 
 const baseURL = import.meta.env.VITE_API_BASE_URL_FRONTEND
 const Checkout = () => {
@@ -131,9 +129,9 @@ const Checkout = () => {
   // Function to calculate total (including shipping and tax)
   const getTotal = () => {
     const subtotal = getSubtotal();
-    const tax = parseFloat(calculateTax(subtotal));
+    const taxdata = parseFloat(calculateTax(subtotal));
     const shipping = parseFloat(shippingchargedata);
-    return subtotal + tax + shipping - discountAmount;
+    return subtotal + taxdata + shipping - discountAmount;
   };
 
 
@@ -168,16 +166,14 @@ const Checkout = () => {
   }
   // Function to handle form submission
   const handleaAddress = (data) => {
-   const city = toTitleCase(data.city);
-  const state = normalizeState(data.state);  
-  const country = toTitleCase(data.country);
+
     const addressData = {
       type: data.type,
       street: data.street,
-      country:country,
+      country:data.country,
       phoneNumber: data.phoneNumber,
-      city: city,
-      state:state,
+      city: data.city,
+      state:data.state,
       postalCode: data.postalCode,
       email: data.email,
       bussinessAddress: {

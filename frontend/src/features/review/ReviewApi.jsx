@@ -30,7 +30,7 @@ export const updateReviewById=async(update)=>{
         const res=await axiosInstance.patch(`/reviews/${update._id}`,update)
         return res.data
     } catch (error) {
-        throw error.response.data
+        throw error.response.data   
     }
 }
 export const deleteReviewById=async(id)=>{

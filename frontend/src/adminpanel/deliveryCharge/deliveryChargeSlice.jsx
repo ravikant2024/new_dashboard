@@ -16,12 +16,14 @@ export const fetchShippingchargeByAddress = createAsyncThunk(
   'shippingCharge/fetchByAddress',
   async (data, { rejectWithValue }) => {
     try {
-      return await getShippingchargeByAddress(data);
+      const result = await getShippingchargeByAddress(data);
+      return result;
     } catch (err) {
-      return rejectWithValue(err.response?.data || err.message);
+      return rejectWithValue(err.message || 'Shipping charge fetch failed');
     }
   }
 );
+
 
 
 // Thunk to fetch all charges

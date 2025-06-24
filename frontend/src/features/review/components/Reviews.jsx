@@ -129,7 +129,7 @@ const Reviews = ({ product }) => {
                     </div>
                 </div>
 
-                <div className="review-form">
+                {/* <div className="review-form">
                     <p className="review-title">{product?.title}</p>
                     {
                         loggedInUser ? (
@@ -166,7 +166,7 @@ const Reviews = ({ product }) => {
                         )
                     }
 
-                </div>
+                </div> */}
             </div>
             <div className="reviews-list">
                 {reviewsData.map((review) => (

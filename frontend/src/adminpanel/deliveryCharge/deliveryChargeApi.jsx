@@ -15,9 +15,10 @@ export const getShippingchargeByAddress = async (data) => {
     const res = await axiosInstance.post('/shipping-charge/getchargebyaddres', data);
     return res.data;
   } catch (error) {
-    throw error.response?.data || 'Message failed';
+    throw error.response?.data || { message: 'Shipping charge request failed' };
   }
 };
+
 
 export const getshippingchargelist = async () => {
   try {
