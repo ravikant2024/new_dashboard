@@ -16,7 +16,7 @@ const CatSidebar = ({ filteredCatData, name }) => {
             <li key={product._id}>
               <Link to={`/product-details/${product._id}`}>
                 {product.title}
-                <span className="count">({product.stockQuantity})</span>
+                {/* <span className="count">({product.stockQuantity})</span> */}
               </Link>
             </li>
           ))}

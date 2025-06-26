@@ -7,10 +7,12 @@ import { fetchFilterProductsAsync, resetProductFetchStatus, selectProductFetchSt
 import { resetCartItemAddStatus, selectCartItemAddStatus } from '../../cart/CartSlice';
 import { createWishlistItemAsync, deleteWishlistItemByIdAsync, resetWishlistItemAddStatus, resetWishlistItemDeleteStatus, selectWishlistItemAddStatus, selectWishlistItemDeleteStatus, selectWishlistItems } from '../../wishlist/WishlistSlice';
 import ProductCard from './ProductCard';
-import usePagination from '@mui/material/usePagination';
 import { styled } from '@mui/material/styles';
 import { ITEMS_PER_PAGE } from '../../../constants';
 import './ProductCard.css';
+import { FaLessThan } from 'react-icons/fa';
+import { FaGreaterThan } from "react-icons/fa";
+
 
 const List = styled('ul')({
     listStyle: 'none',
@@ -92,11 +94,9 @@ const ProductList = () => {
         }
     };
 
-    const { items } = usePagination({
-        count: Math.ceil(totalResults / ITEMS_PER_PAGE),
-        page: page,
-        onChange: (_, page) => setPage(page),
-    });
+    const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE);
+    // Create an array of page numbers
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     // Reset statuses when component unmounts
     useEffect(() => {
@@ -136,51 +136,33 @@ const ProductList = () => {
                 </div>
             </div>
 
-
-
             {/* Pagination */}
+            {totalPages > 1 && (
+                <div className="product-list-pagination">
+                    <span
+                        onClick={() => page > 1 && setPage(page - 1)}
+                        className={`pagination-arrow ${page === 1 ? 'disabled' : ''}`}
+                    >
+                        <FaLessThan />
+                    </span>
 
-            {totalResults > 5 && (
-                <List>
-                    {items.map(({ page, type, selected, ...item }, index) => {
-                        let children = null;
-
-                        // If it's an ellipsis, just display the "..."
-                        if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-                            children = '…';
-                        } else if (type === 'page') {
-                            // Style the selected page button differently
-                            children = (
-                                <button
-                                    type="button"
-                                    style={{
-                                        fontWeight: selected ? 'bold' : 'normal',
-                                        backgroundColor: selected ? '#007bff' : 'transparent',
-                                        color: selected ? '#fff' : '#000',
-                                        border: selected ? '1px solid #007bff' : '1px solid #ccc',
-                                        padding: '6px 10px',
-                                        borderRadius: '5px',
-                                        marginTop:'6px'
-                                    }}
-                                    {...item}
-                                >
-                                    {page}
-                                </button>
-                            );
-                        } else {
-                            // For other types of pagination (like 'previous', 'next', or 'ellipsis')
-                            children = (
-                                <button type="button" {...item}>
-                                    {type.toUpperCase()}
-                                </button>
-                            );
-                        }
-
-                        return <li key={index}>{children}</li>;
-                    })}
-                </List>
-            )
-            }
+                    {pageNumbers.map((num) => (
+                        <span
+                            key={num}
+                            onClick={() => setPage(num)}
+                            className={`pagination-number ${num === page ? 'active' : ''}`}
+                        >
+                            {num}
+                        </span>
+                    ))}
+                    <span
+                        onClick={() => page < totalPages && setPage(page + 1)}
+                        className={`pagination-arrow ${page === totalPages ? 'disabled' : ''}`}
+                    >
+                        <FaGreaterThan />
+                    </span>
+                </div>
+            )}
         </>
     );
 };

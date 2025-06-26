@@ -11,7 +11,6 @@ const HelpCenter = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector(selectLoggedInUser);
   const orders = useSelector(selectOrders);
-  console.log("orders", orders)
 
   useEffect(() => {
     if (loggedInUser?._id) {
@@ -25,7 +24,6 @@ const HelpCenter = () => {
 
   return (
     <div className="help-center-container">
-    
       <div className="help-content-area">
           <div className='help-center-description'>
         <h1 className="help-center-title">Original Innovation LLP Help Center | Customer Care Support</h1>
@@ -81,7 +79,6 @@ const HelpCenter = () => {
           </div>
         )}
       </div>
-
     </div>
 
   );

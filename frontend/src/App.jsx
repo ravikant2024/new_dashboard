@@ -65,6 +65,7 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import OrderDetailpage from './pages/OrderDetailpage';
 import DeliveryChargePage from './adminpanel/pages/DeliveryChargePage';
 import DeliveryChargeListPage from './adminpanel/pages/DeliveryChargeListPage';
+import { selectBackendDown } from './store/backendStatusSlice';
 function App() {
   const loggedInUser = useSelector(selectLoggedInUser);
   useAuthCheck();
@@ -149,6 +150,7 @@ function App() {
 
 export default function AppWrapper() {
   return (
+    
     <Router>
       <App />
     </Router>

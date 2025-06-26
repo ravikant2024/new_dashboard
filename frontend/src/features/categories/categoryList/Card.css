@@ -2,7 +2,7 @@
    Container & Headings
 -------------------------- */
 .cat-container {
-  margin: 40px 0 0 8px;
+  margin: 10px 0 0 0px;
   padding: 13px;
   text-align: center;
 }
@@ -57,22 +57,21 @@
 -------------------------- */
 .catcard-image-wrapper {
   width: 100%;
-  max-width: 250px;
-  aspect-ratio: 5 / 4;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 15px;
-  margin-top: 17px;
+  padding: 5px; /* helps with spacing inside */
+  box-sizing: border-box;
 }
 
 .catcard-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+  max-width: 100%;
+  max-height: 100%;
+   object-fit: contain !important;
 }
+
 
 
 /* -------------------------

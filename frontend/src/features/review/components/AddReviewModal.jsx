@@ -116,8 +116,8 @@ const AddReviewModal = ({ setShowModal, product, loggedInUser, order, fetchRevie
                         <h4 className="review-label">Review Title</h4>
                         <input
                             type="text"
-                            placeholder="Title..."
-                            {...register("title", { required: "Title is required" })}
+                            placeholder="Title(optional)..."
+                            {...register("title" )}
                             className="review-title-input"
                         />
                         {errors.title && <p className="error-message">{errors.title.message}</p>}

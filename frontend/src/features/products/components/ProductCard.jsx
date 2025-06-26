@@ -7,7 +7,7 @@ import { selectWishlistItems } from '../../wishlist/WishlistSlice';
 import { useNavigate } from 'react-router-dom';
 import { BsFillForwardFill } from "react-icons/bs";
 import { key } from '../../../constants/cred';
-import ReactStarRating from 'react-star-rating-component';
+import StarRatings from 'react-star-ratings';
 import { fetchAllReviewsAsync, selectReviews } from '../../review/ReviewSlice';
 
 const CustomTooltip = ({ text }) => (
@@ -16,7 +16,6 @@ const CustomTooltip = ({ text }) => (
 
 const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPercentage,
     handleAddRemoveFromWishlist, }) => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [showTooltip, setShowTooltip] = useState(null);
@@ -25,26 +24,27 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
     const cartItems = useSelector(selectCartItems);
     const [rating, setRating] = useState(null);
     const reviewsData = useSelector(selectReviews);
- 
+
     useEffect(() => {
-    dispatch(fetchAllReviewsAsync())
-  }, [dispatch])
+        dispatch(fetchAllReviewsAsync())
+    }, [dispatch])
 
 
-   useEffect(() => {
-    if (reviewsData && reviewsData.length > 0) {
-      const productReviews = reviewsData.filter(review => review.product === id || review.product._id === id)
+    useEffect(() => {
+        if (reviewsData && reviewsData.length > 0) {
+            const productReviews = reviewsData.filter(review => review.product === id || review.product._id === id)
+            if (productReviews.length > 0) {
+                const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0)
+                const avg = totalRating / productReviews.length
+                setRating(parseFloat(avg.toFixed(1)))
+            } else {
+                setRating(null)
+            }
+        }
+    }, [reviewsData, id])
 
-      if (productReviews.length > 0) {
-        const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0)
-        const avg = totalRating / productReviews.length
-        setRating(avg.toFixed(1)) 
-      } else {
-        setRating(null) 
-      }
-    }
-  }, [reviewsData, id])
     let isProductAlreadyinWishlist = -1
+
     isProductAlreadyinWishlist = wishlistItems.some((item) => item?.product?._id === id)
     const isProductAlreadyInCart = cartItems.some((item) => item?.product?._id === id)
 
@@ -63,7 +63,6 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
             // navigate("/my-account")
         }
     };
-
     // Go to cart page
     const handleCartPage = () => {
         navigate("/cart")
@@ -87,18 +86,15 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                         <div className="product-card-info">
                             <div className="product-card-sku">SKU: {sku}</div>
                             <div className="product-rating">
-
-                                <ReactStarRating
+                                <StarRatings
+                                    rating={rating || 0}           
+                                    starRatedColor="gold"
+                                    numberOfStars={5}
                                     name="product-rating"
-                                    starCount={5}
-                                    value={rating}
-                                    editing={false}
+                                    starDimension="20px"
+                                    starSpacing="2px"
                                 />
-                                {
-                                    rating && (
-                                        <span> ({rating})</span>
-                                    )
-                                }
+                                {rating !== null && <span> ({rating})</span>}
                             </div>
                         </div>
 
@@ -146,7 +142,6 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                                 </>
                             )}
                         </div>
-
                     </div>
                 </div>
 
@@ -156,7 +151,6 @@ const ProductCard = ({ id, title, sku, price, thumbnail, description, discountPe
                         <span className="save-money">₹ {savedAmount.toFixed(2)}</span>
                     </div>
                 )}
-
 
                 {/* Conditionally render Add to Wishlist or Remove from Wishlist */}
                 <div className="wishlist-card-actions">

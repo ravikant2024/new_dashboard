@@ -17,9 +17,11 @@ import commentReducer from '../features/comment/CommentSlice';
 import contactReducer from '../features/contact/ContactSlice';
 import bulkEnquiryReducer from '../features/bulkEnquiry/BulkEnquirySlice';
 import shippingChargeReducer from '../adminpanel/deliveryCharge/deliveryChargeSlice';
+import backendStatusReducer from './backendStatusSlice';
 
 const store = configureStore({
   reducer: {
+    backendStatus: backendStatusReducer,
     AuthSlice: authReducer,
     userSlice: userReducer,
     categories: categoriesReducer,

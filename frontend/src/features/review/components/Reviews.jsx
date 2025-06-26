@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
 import { toast } from 'react-toastify'
 import ReviewItems from './ReviewItems';
-import ReactStarRating from 'react-star-rating-component';
+import StarRatings from 'react-star-ratings';
 import { useNavigate } from "react-router";
 
 const Reviews = ({ product }) => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [rating, setRating] = useState(0);
     const loggedInUser = useSelector(selectLoggedInUser)
@@ -76,25 +76,24 @@ const Reviews = ({ product }) => {
         setRating(index);
     };
 
- const onSubmit = (data) => {
-    if (  loggedInUser._id !== "77f2434c53bbe09c7c63f666"
-    ) {
-        const review = {
-            ...data,
-            rating: rating,
-            user: loggedInUser._id,
-            product: product._id,
-        };
-        dispatch(createReviewAsync(review));
-    } else {
-        toast.error("You are not allowed to submit a review. Please login");
-        navigate("/my-account");
-    }
+    const onSubmit = (data) => {
+        if (loggedInUser._id !== "77f2434c53bbe09c7c63f666"
+        ) {
+            const review = {
+                ...data,
+                rating: rating,
+                user: loggedInUser._id,
+                product: product._id,
+            };
+            dispatch(createReviewAsync(review));
+        } else {
+            toast.error("You are not allowed to submit a review. Please login");
+            navigate("/my-account");
+        }
 
-    reset();
-    setRating(0);
-};
-
+        reset();
+        setRating(0);
+    };
 
     useEffect(() => {
         return () => {
@@ -137,18 +136,18 @@ const Reviews = ({ product }) => {
                                 <div className="review-rating">
                                     <p>Your Rating</p>
                                     <div className="star-rating">
-                                        <ReactStarRating
-                                            name="product-rating"
-                                            starCount={5}
-                                            value={rating}
-                                            onStarClick={handleRatingChange}
-                                            editing={true}
-                                            renderStarIcon={(index, value) => value >= index ? '★' : '☆'}
-                                            starColor="gold"
-                                            emptyStarColor="gray"
-                                        />
-
-                                    </div>
+                                            <StarRatings
+                                                rating={rating}
+                                                changeRating={handleRatingChange} 
+                                                numberOfStars={5}
+                                                starRatedColor="gold"
+                                                starEmptyColor="gray"
+                                                starDimension="24px"
+                                                starSpacing="2px"
+                                                name="product-rating"
+                                                editing={true}
+                                            />
+                                            </div>
                                     {errors.rating && <p className="error">Rating is required</p>}
                                 </div>
 

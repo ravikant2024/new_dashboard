@@ -3,7 +3,7 @@ import { VscKebabVertical } from "react-icons/vsc";
 import { useDispatch } from 'react-redux';
 import { deleteReviewByIdAsync, updateReviewByIdAsync } from '../ReviewSlice';
 import { useForm } from 'react-hook-form';
-import ReactStarRating from 'react-star-rating-component';
+import StarRatings from "react-star-ratings";
 
 const ReviewItems = ({ review, loggedInUser }) => {
     const dispatch = useDispatch();
@@ -43,18 +43,13 @@ const ReviewItems = ({ review, loggedInUser }) => {
     const handleCancel = () => {
         setIsEditing(false);
     };
-
-    // Render interactive stars
-    const handleStarClick = (rating) => {
-        setValue('rating', rating);
-    };
-
+    
     return (
         <div key={review._id} className="review-item">
             <div className="review-header">
                 <span className="user-name">{review?.user?.name}</span>
                 {review?.user?._id === loggedInUser?._id && (
-                    <VscKebabVertical
+                    <VscKebabVertical-
                         onClick={toggleOptions}
                         style={{ cursor: 'pointer' }}
                     />
@@ -62,23 +57,26 @@ const ReviewItems = ({ review, loggedInUser }) => {
             </div>
 
             {/* Dropdown Options */}
-            {isOptionsOpen && (
+            {/* {isOptionsOpen && (
                 <div className="options-dropdown">
                     <div onClick={handleEditReview}>Edit</div>
-                    {/* <div onClick={() => handleDeleteReview(review._id)}>Delete</div> */}
+                    <div onClick={() => handleDeleteReview(review._id)}>Delete</div>
                 </div>
-            )}
+            )} */}
 
             <div className="review-data">
                 {isEditing ? (
                     <form onSubmit={handleSubmit(handleUpdateReview)} className="edit-form">
                         <div className="edit-rating">
-                            <ReactStarRating
+                            <StarRatings
+                                rating={watch('rating') || 0}
+                                starRatedColor="#ffd700"
+                                numberOfStars={5}
+                                starDimension="25px"
+                                starSpacing="3px"
                                 name="rating"
-                                starCount={5}
-                                value={watch('rating')}
-                                onStarClick={handleStarClick}
-                                editing={true}
+                                isSelectable={true}
+                                isAggregateRating={false}
                             />
                         </div>
                         <textarea
@@ -94,12 +92,16 @@ const ReviewItems = ({ review, loggedInUser }) => {
                 ) : (
                     <div className="review-content">
                         <div className="rating">
-                            <ReactStarRating
+                            <StarRatings
+                                rating={review.rating}
+                                starRatedColor="gold"
+                                numberOfStars={5}
                                 name="rating"
-                                starCount={5}
-                                value={review.rating}
+                                starDimension="20px"
+                                starSpacing="2px"
                                 editing={false}
                             />
+
                         </div>
                         <div className="comment">
                             {review.comment}

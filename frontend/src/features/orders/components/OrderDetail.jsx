@@ -8,8 +8,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa6";
 import { fetchShippingchargeByAddress, selectShippingChargeByAddress } from "../../../adminpanel/deliveryCharge/deliveryChargeSlice";
 import { TAXES } from "../../../constants";
-import ReactStarRating from 'react-star-rating-component';
-import { createReviewAsync, fetchReviewsByProductIdAsync, selectReviews, updateReviewByIdAsync } from "../../review/ReviewSlice";
+import StarRatings from "react-star-ratings";
+import { fetchReviewsByProductIdAsync, selectReviews, updateReviewByIdAsync } from "../../review/ReviewSlice";
 import { selectLoggedInUser } from "../../auth/AuthSlice";
 import AddReviewModal from "../../review/components/AddReviewModal";
 
@@ -26,20 +26,22 @@ const OrderDetail = () => {
     const orderId = queryParams.get("order_id");
     const itemId = queryParams.get("item_id");
     const orders = useSelector(selectOrderById);
-    console.log("orders",orders)
     const order = orders?.data?._id === orderId ? orders.data : null;
-    console.log("order",order)
     const item = order?.item.find(i => i._id === itemId);
     const addressData = order?.address;
     const product = item?.product;
-    console.log("product",product)
     const items = orders?.data?.item || [];
-    console.log("items",items)
+
     // calculate tax
     const totalTax = items.reduce((acc, item) => {
         const price = item?.product?.price || 0;
         return acc + (price * TAXES);
     }, 0);
+
+    // Fetch all review data
+    const existingReview = fetchReviewData?.find(
+        r => r.product === product?._id && r.user?._id === loggedInUser?._id
+    );
 
     // Fetch order details by id
     useEffect(() => {
@@ -59,6 +61,7 @@ const OrderDetail = () => {
         }
 
     }, [dispatch, addressData]);
+
     // get review on the basis of Id
     useEffect(() => {
         if (product?._id) {
@@ -78,6 +81,7 @@ const OrderDetail = () => {
     const formattedDate = new Date(order?.createdAt).toLocaleDateString("en-IN", {
         day: "numeric", month: "short"
     });
+
 
     const statusTimelineSteps = [
         {
@@ -129,40 +133,13 @@ const OrderDetail = () => {
         },
     ];
 
-    /// Add and update product rating
-    const onStarClick = async (nextValue) => {
-        setRating(nextValue);
-        const existingReview = fetchReviewData?.find(
-            (r) => r.product === product?._id && r.user?._id === loggedInUser?._id
-        );
-        const payload = {
-            order: order._id,
-            user: loggedInUser._id,
-            rating: nextValue,
-            product: product._id,
-        };
-
-        try {
-            if (existingReview) {
-                await dispatch(updateReviewByIdAsync({ _id: existingReview._id, ...payload }));
-            } else {
-                await dispatch(createReviewAsync(payload));
-            }
-            setShowThankYou(true);
-            setTimeout(() => setShowThankYou(false), 3000);
-        } catch (err) {
-            console.error("Review submission failed:", err);
-        }
-    };
-
     return (
         <>
             <div className="main-orderdetails">
                 <div className="order-receipt-wrapper">
                     {/* Left Section */}
                     <div className="order-receipt-left">
-                        {/* `/product-details/${id}` */}
-                        <Link to={`/product-details/${product?._id}`}  className="order-details-link">
+                        <Link to={`/product-details/${product?._id}`} className="order-details-link">
                             <div className="order-receipt-header">
                                 <div className="order-receipt-info">
                                     <h3 className="order-receipt-title">{product?.title}</h3>
@@ -210,19 +187,26 @@ const OrderDetail = () => {
                         </div>
                         <hr />
                         <div className="order-receipt-rating">
-                            <ReactStarRating
+                            <StarRatings
+                                rating={rating || 0}
+                                starRatedColor="#ffd700"
+                                numberOfStars={5}
+                                starDimension="25px"
+                                starSpacing="3px"
                                 name="orderRating"
-                                starCount={5}
-                                value={rating}
-                                onStarClick={onStarClick}
-                                starColor="rgb(82, 210, 82)"
-                                emptyStarColor="#ccc"
-                                className="order-receipt-star"
+
                             />
 
-                            <div className="order-receipt-review-btn" onClick={() => setShowModal(true)}>
-                                Add Review
-                            </div>
+                            {!existingReview ? (
+                                <div className="order-receipt-review-btn" onClick={() => setShowModal(true)}>
+                                    Add Review
+                                </div>
+                            ) : (
+                                <div className="order-receipt-review-btn disabled">
+                                    Review Submitted
+                                </div>
+                            )}
+
                         </div>
                         {showThankYou && (
                             <div className="thank-you-modal-overlay">

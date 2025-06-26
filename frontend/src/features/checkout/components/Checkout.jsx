@@ -166,7 +166,6 @@ const Checkout = () => {
   }
   // Function to handle form submission
   const handleaAddress = (data) => {
-
     const addressData = {
       type: data.type,
       street: data.street,
@@ -313,7 +312,6 @@ const Checkout = () => {
         quantity: item.quantity,
       })),
     };
-
     if (loggedInUser._id === import.meta.env.VITE_GUESTUSER_ID) {
       if (selectedPaymentMethod === 'online') {
         const order = {

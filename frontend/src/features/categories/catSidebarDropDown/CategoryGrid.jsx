@@ -43,15 +43,12 @@ useEffect(() => {
   }
 }, [wishlistItemDeleteStatus, dispatch]);
 
-
-
   const handleSortChange = (order) => {
     setSortOrder(order);
   };
 
   const sortedData = useMemo(() => {
     if (!filteredCatData) return [];
-
     switch (sortOrder) {
       case 'lowToHigh':
         return [...filteredCatData].sort((a, b) => a.price - b.price);
@@ -114,7 +111,7 @@ useEffect(() => {
               price={items.price}
               description={items?.description}
               discountPercentage={items?.discountPercentage}
-              averageRating={items?.averageRating} // make sure it's passed to card
+              averageRating={items?.averageRating} 
               handleAddRemoveFromWishlist={handleAddRemoveFromWishlist}
             />
           ))

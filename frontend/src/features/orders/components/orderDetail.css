@@ -164,6 +164,12 @@
   background-color: #0f5ab2;
 }
 
+.order-receipt-review-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 /* Chat */
 .order-receipt-chat {
   margin-top: 30px;

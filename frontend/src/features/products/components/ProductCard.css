@@ -33,6 +33,7 @@
     justify-content: space-between;
     height: 406px;
     position: relative;
+    border-radius: 1px;
 }
 
 /* Hover effect for the card */
@@ -103,6 +104,7 @@
     font-weight: bold;
     display: flex;
     align-items: center;
+    margin-top: 5px;
 }
 
 /* Price Styling */
@@ -293,6 +295,65 @@
 
 .cart-image {
     cursor: pointer;
+}
+
+.product-main-container {
+    padding: 20px;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.no-product {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 18px;
+}
+
+.product-list-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.pagination-arrow {
+    cursor: pointer;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF9933;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination-arrow.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.pagination-number {
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 6px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #000;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination-number.active {
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
 }
 
 

@@ -16,7 +16,7 @@ export const RootLayout = () => {
             <main>
                 <Outlet />
             </main>
-                  {/* <ChatPage /> */}
+                  <ChatPage />
             <Footer />
         </>
     )
