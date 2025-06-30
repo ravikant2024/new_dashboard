@@ -237,65 +237,76 @@ const Checkout = () => {
 
   // Handle Apply Coupon Logic
   const handleApplyCoupon = async () => {
-    if (!couponCode) {
-      return toast.error("Please enter a coupon code");
+  if (!couponCode) {
+    return toast.error("Please enter a coupon code");
+  }
+
+  if (!loggedInUser?._id) {
+    return toast.error("User not found");
+  }
+
+  const guestUserId = import.meta.env.VITE_GUESTUSER_ID;
+  if (loggedInUser._id === guestUserId) {
+    return toast.error("Guest users cannot apply coupons");
+  }
+
+  try {
+    const res = await getAllCoupon();
+    const coupons = res.data;
+
+    const coupon = coupons.find(
+      c => c.couponId.toLowerCase() === couponCode.trim().toLowerCase()
+    );
+
+    if (!coupon) {
+      return toast.error("Invalid coupon code");
     }
 
-    if (!loggedInUser?._id) {
-      return toast.error("User not found");
-    }
-
-    const guestUserId = import.meta.env.VITE_GUESTUSER_ID;
-    if (loggedInUser._id === guestUserId) {
-      return toast.error("Guest users cannot apply coupons");
-    }
-
-    try {
-      const res = await getAllCoupon();
-      const coupons = res.data;
-
-      const coupon = coupons.find(
-        c => c.couponId.toLowerCase() === couponCode.trim().toLowerCase()
+    const checkRes = await checkCouponCodeIssue(coupon._id, loggedInUser._id);
+    if (!checkRes.success) {
+      return toast.error(
+        typeof checkRes.message === 'string'
+          ? checkRes.message
+          : JSON.stringify(checkRes.message || "Coupon not valid")
       );
-
-      if (!coupon) {
-        return toast.error("Invalid coupon code");
-      }
-
-      const checkRes = await checkCouponCodeIssue(coupon._id, loggedInUser._id);
-      if (!checkRes.success) {
-        return toast.error(checkRes.message || "Coupon not valid");
-      }
-
-      const now = Date.now();
-      if (coupon.startDate && now < new Date(coupon.startDate).getTime()) {
-        return toast.error("Coupon not active yet");
-      }
-
-      if (coupon.endDate && now > new Date(coupon.endDate).getTime()) {
-        return toast.error("Coupon has expired");
-      }
-
-      const subtotal = getSubtotal();
-      let discount = 0;
-
-      if (coupon.isPercentage) {
-        discount = (subtotal * coupon.discountPercentage) / 100;
-        if (coupon.maxMoneyDiscount && discount > coupon.maxMoneyDiscount) {
-          discount = coupon.maxMoneyDiscount;
-        }
-      } else {
-        discount = coupon.discountPercentage;
-      }
-      setAppliedCoupon(coupon);
-      setDiscountAmount(discount);
-      toast.success("Coupon applied successfully!");
-      setCouponCode("");
-
-    } catch (err) {
-      toast.error(err?.message || "Failed to apply coupon");
     }
-  };
+
+    const now = Date.now();
+    if (coupon.startDate && now < new Date(coupon.startDate).getTime()) {
+      return toast.error("Coupon not active yet");
+    }
+
+    if (coupon.endDate && now > new Date(coupon.endDate).getTime()) {
+      return toast.error("Coupon has expired");
+    }
+
+    const subtotal = getSubtotal();
+    let discount = 0;
+
+    if (coupon.isPercentage) {
+      discount = (subtotal * coupon.discountPercentage) / 100;
+      if (coupon.maxMoneyDiscount && discount > coupon.maxMoneyDiscount) {
+        discount = coupon.maxMoneyDiscount;
+      }
+    } else {
+      discount = coupon.discountPercentage;
+    }
+
+    setAppliedCoupon(coupon);
+    setDiscountAmount(discount);
+    toast.success("Coupon applied successfully!");
+    setCouponCode("");
+
+  } catch (err) {
+    const errorMessage =
+      typeof err?.message === 'string'
+        ? err.message
+        : JSON.stringify(err?.message || "Failed to apply coupon");
+
+    toast.error(errorMessage);
+  }
+};
+
 
   // Pay and order
   const handleCreateOrder = async () => {
