@@ -661,7 +661,6 @@ const Checkout = () => {
                     <p><strong>GST Number:</strong> {address.bussinessAddress.gstNumber}</p>
                     <p><strong>Company Name:</strong> {address.bussinessAddress.gstCompanyName}</p>
                     <p><strong>Business Address:</strong> {address.bussinessAddress.gstAddress}</p>
-                    <p><strong>Business ID:</strong> {address.bussinessAddress._id}</p>
                   </label>
                 </div>
                 <div className="address-actions">
