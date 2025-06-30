@@ -87,10 +87,6 @@ const shippingChargeRoutes = require('./routes/ShippingCharge');
     server.use(cookieParser());
     server.use(morgan("tiny"));
     const requestLogger = (req, res, next) => {
-        console.log(`Method: ${req.method}`);
-        console.log(`Path: ${req.path}`);
-        console.log(`Query Params:`, req.query);
-        console.log(`Request Body:`, req.body);
         const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         console.log('Client IP:', clientIp);
         next(); 

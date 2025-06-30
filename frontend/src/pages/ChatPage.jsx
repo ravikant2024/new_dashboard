@@ -1,12 +1,13 @@
 import React from 'react'
 import Chat from '../features/chat/components/Chat'
-import ChatBot from '../features/chat/components/ChatBot'
+import ChatDuplocate from '../features/chat/components/chatDuplocate'
 
 const ChatPage = () => {
     return (
         <>
             {/* <Chat /> */}
-            {/* <ChatBot/> */}
+        <ChatDuplocate/>
+           
         </>
     )
 }
